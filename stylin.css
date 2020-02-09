@@ -1,0 +1,20 @@
+body {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+}
+.current-city-div{
+  position: relative;
+}
+.current-city-stats{
+  background: rgba(0, 0, 0, 0.33);
+  font-size: 1em;
+  padding: .5em;
+  color: white;
+  text-shadow: 2px black;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 1em;
+  margin-left: .5em;
+}
+#jumbo-custom{
+  background: blue;
+}

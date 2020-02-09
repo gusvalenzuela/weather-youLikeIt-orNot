@@ -3,32 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- font awesome  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
     <script defer src="./script-x.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> -->
+    <!-- font awesome  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="stylin.css">
-    <title>Document</title>
+    <title>Weather App | Home</title>
 </head>
 <body>
-
+    
     <form id="search-form">
-        <label for="search-input">Enter City Name:</label>
-        <input type="text" id="search-input" placeholder="search">
-        <label for="search-input-state">State:</label>
-        <input type="text" id="search-input-state" placeholder="(optional)">
-        <label for="search-input-state-zip">or Zip Code:</label>
-        <input type="text" id="search-input-zip" placeholder="(optional)">
-        <input type="submit" id="search-button" value="Submit">
+        <div class="row">
+            <div class="col">
+                <label for="search-input">Enter City Name:</label>
+                <input type="text" id="search-input" placeholder="search">
+                <!-- <label for="search-input-state">State:</label>
+                <input type="text" id="search-input-state" placeholder="(optional)"> -->
+            </div>
+            <div class="col">
+                <label for="search-input-state-zip">or Zip Code:</label>
+                <input type="text" id="search-input-zip" placeholder="(optional)" size="9px">
+                <input type="submit" id="search-button" value="Submit">
+            </div>
+        </div>
     </form>
+
+    <div class="container" id="main-container">
+
+        <div class="jumbotron jumbotron-fluid py-0 jumbo-custom">
+            <div class="row">
+                <div class="col-sm-12 col-md-8" id="current-city-div">
+                    <img src="https://images.unsplash.com/photo-1580953889927-245d1fcd2519?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" class="img-fluid" alt="" >
+                    <div class="row current-city-stats" id="current-city-stats"></div>
+                </div>
+                <div class="col-sm-3 col-md-3">history</div>
+                <div class="col-sm-8 col-md-12"> FORECAST</div>
+            </div>
+        </div>
+    </div>
+    
+    
     <!-- moment time JS -->
     <script src="./node_modules/moment/moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <!-- bootstrap optional JS  -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    
     
 </body>
 </html>
