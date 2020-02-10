@@ -6,7 +6,11 @@ const currentCityStats = $(`#current-city-stats`)
 const historyDiv = $(`#history-div`)
 var cityImageURLs = []
 var searchHistory = []
-var searchTerm;
+
+if(JSON.parse(localStorage.getItem(`weather-app-search-history`)) !== null){
+    searchHistory = JSON.parse(localStorage.getItem(`weather-app-search-history`))
+}
+
 var currentCity;
 
 var weatherErr = function weatherError(){
@@ -21,17 +25,20 @@ function init(){
     pullWeatherData()
     printHistory()
 }
-function printHistory(){
+function printHistory(){        // find how to make the list collapsible on sm screens (with classes)
     historyDiv.empty()
-    searchHistory = JSON.parse(localStorage.getItem(`weather-app-search-history`))
+    var h4 = $(`<p class="lead">`).text(`Search History:`)
+    historyDiv.append(h4)
+    console.log(searchHistory.length)
     var x = 0
-    if(searchHistory.length > 10){
+    if (searchHistory.length > 10) {
         x = searchHistory.length - 10
-    } 
-        for(i=searchHistory.length-1;i>x;i--){
-        
+    } else if (searchHistory.length === 0) {
+        historyDiv.append($(`<p style="font-size:small">`).text(`(No search history)`))
+    }
+    for (i = searchHistory.length - 1; i > x; i--) {
         var ul = $(`<ul class="pl-2 w-100" id="history-list">`)
-        var lItem = $(`<li>`).text(searchHistory[i]).appendTo(ul)
+        $(`<li class="bg-info">`).text(searchHistory[i]).appendTo(ul)
         historyDiv.append(ul)
 
     }
