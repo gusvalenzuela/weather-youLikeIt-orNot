@@ -3,11 +3,15 @@ const searchForm = $(`#search-form`)
 const searchInput = $(`#search-input`)
 const searchButton = $(`#search-button`)
 const currentCityStats = $(`#current-city-stats`)
+const historyDiv = $(`#history-div`)
 var cityImageURLs = []
 var searchHistory = []
 var searchTerm;
 var currentCity;
-// searchHistory = localStorage.getItem(JSON.parse(`weather-app-search-history`))
+
+var weatherErr = function weatherError(){
+    searchInput.attr(`style`, `border-style: groove; border-color: red;`).attr(`placeholder`,`ENTER VALID CITY NAME`)
+}
 
 init()
 
@@ -15,8 +19,23 @@ function init(){
     searchTerm = `sacramento`
     currentCity = {}
     pullWeatherData()
+    printHistory()
 }
+function printHistory(){
+    historyDiv.empty()
+    searchHistory = JSON.parse(localStorage.getItem(`weather-app-search-history`))
+    var x = 0
+    if(searchHistory.length > 10){
+        x = searchHistory.length - 10
+    } 
+        for(i=searchHistory.length-1;i>x;i--){
+        
+        var ul = $(`<ul class="pl-2 w-100" id="history-list">`)
+        var lItem = $(`<li>`).text(searchHistory[i]).appendTo(ul)
+        historyDiv.append(ul)
 
+    }
+}
 searchForm.submit(function(event){
     event.preventDefault()
     currentCity = {}
@@ -24,12 +43,8 @@ searchForm.submit(function(event){
     pullWeatherData()
     searchHistory.push(searchTerm)
     localStorage.setItem(`weather-app-search-history`,JSON.stringify(searchHistory))
+    printHistory()
 })
-var weatherErr = function weatherError(){
-    searchInput.attr(`style`, `border-style: groove; border-color: red;`).attr(`placeholder`,`ENTER VALID CITY NAME`)
-
-}
-
 function pullWeatherData(){
     var apiKey = `a49df28db557e1be1c568c4992f04aec`
     
@@ -48,9 +63,9 @@ function pullWeatherData(){
         currentCity.windSpeed = response.wind.speed + " MPH"
         currentCity.coord = response.coord
         currentCity.icon_url = `http://openweathermap.org/img/wn/`+response.weather[0].icon+`@2x.png`
-        currentCity.timezoneGMT = Math.floor(((response.timezone)/60)/60)
+        currentCity.timezoneGMT = Math.floor(((response.timezone)/60))
         console.log(currentCity.timezoneGMT)
-        // console.log(`local time in ` + currentCity.name + ` is ` + moment.tz().format(`LLLL`))
+        // console.log(`local time in ` + currentCity.name + ` is ` + moment().utcOffset(currentCity.timezoneGMT).format(`ll`))
     }).then(function(){
         var ak = `AIzaSyAYlOOGrSdKUf7eEO-W37dOfQJBAbImqvY`
         $.ajax({
@@ -77,48 +92,45 @@ function pullWeatherData(){
     
     console.log(currentCity)
 }
-
 function printWeatherData(){
     
     currentCityStats.empty()
-    console.log(currentCity)
-    console.log(`=====PRINTING...=====`)
-    console.log(currentCity.uvIndex)
-    var iconImg = $(`<img>`).attr(`src`, currentCity.icon_url).attr(`height`,`75px;`).attr(`class`,`mx-3 icon-image`)
+    var iconImg = $(`<img>`).attr(`src`, currentCity.icon_url).attr(`class`,`mx-3 icon-image`)
+    var dateDisplay = $(`<p class="mb-0 text-center" style="font-size: small;">`).text(moment().utcOffset(currentCity.timezoneGMT).format(`llll`))
     var headerName = $(`<h2>`).attr(`class`,`text-left city-name`).text(currentCity.name).append(iconImg)
     var ul = $(`<ul>`).attr(`class`,`w-100 list-group text-left`)
-    var currentTemp = $(`<li>`).attr(`class`,`p-1 list-group-item rounded-0 bg-transparent`).attr(`id`,`city-temp`).html(`<i class="font-weight-bold">Temp</i>: `+currentCity.temp)
-    var currentHumidity = $(`<li>`).attr(`class`,`p-1 list-group-item rounded-0 bg-transparent`).attr(`id`,`city-humi`).html(`<i class="font-weight-bold">Humidity</i>: `+currentCity.humidity)
-    var currentUVIndex = $(`<li>`).attr(`class`,`p-1 list-group-item rounded-0 bg-transparent`).attr(`id`,`city-uvin`).html(`<i class="font-weight-bold">UV Index</i>: `+currentCity.uvIndex)
-    var currentWindspeed = $(`<li>`).attr(`class`,`p-1 list-group-item rounded-0 bg-transparent`).attr(`id`,`city-wind`).html(`<i class="font-weight-bold">Wind Speed</i>: `+currentCity.windSpeed)
-    
+    var currentTemp = $(`<li>`).attr(`class`,`p-1 list-group-item rounded-0 bg-transparent`).attr(`id`,`city-temp`).html(`<span class="font-weight-bold">Temp</span>: `+currentCity.temp)
+    var currentHumidity = $(`<li>`).attr(`class`,`p-1 list-group-item rounded-0 bg-transparent`).attr(`id`,`city-humi`).html(`<span class="font-weight-bold">Humidity</span>: `+currentCity.humidity)
+    var currentUVIndex = $(`<li>`).attr(`class`,`p-1 list-group-item rounded-0 bg-transparent`).attr(`id`,`city-uvin`).html(`<span class="font-weight-bold">UV Index</span>: `+currentCity.uvIndex)
+    var currentWindspeed = $(`<li>`).attr(`class`,`p-1 list-group-item rounded-0 bg-transparent`).attr(`id`,`city-wind`).html(`<span class="font-weight-bold">Wind Speed</span>: `+currentCity.windSpeed)
+   
     switch(Math.floor(currentCity.uvIndex)){
         case 0:
         case 1:
         case 2:
-            currentUVIndex.attr(`class`, `p-1 list-group-item rounded-0 bg-suc text-body`)
+            currentUVIndex.attr(`class`, `p-1 list-group-item rounded-0 bg-suc`)
             break
         case 3:
         case 4:
         case 5:
-            currentUVIndex.attr(`class`, `p-1 list-group-item rounded-0 bg-war text-body`)
+            currentUVIndex.attr(`class`, `p-1 list-group-item rounded-0 bg-war`)
             break
         case 6:
         case 7:
-            currentUVIndex.attr(`class`,`p-1 list-group-item rounded-0 bg-ora text-body`)
+            currentUVIndex.attr(`class`,`p-1 list-group-item rounded-0 bg-ora`)
             break
         case 8:
         case 9:
         case 10:
-            currentUVIndex.attr(`class`,`p-1 list-group-item rounded-0 bg-dan text-body`)
+            currentUVIndex.attr(`class`,`p-1 list-group-item rounded-0 bg-dan`)
             break
         default:
-            currentUVIndex.attr(`class`,`p-1 list-group-item rounded-0 bg-vio text-body`)
+            currentUVIndex.attr(`class`,`p-1 list-group-item rounded-0 bg-vio`)
             break
     }
 
-    // append all list items into my UL and finally append that to the prerendered div currentCityStats
-    ul.append(headerName, currentTemp,currentHumidity,currentWindspeed, currentUVIndex)
+    // append all list s into my UL and finally append that to the prerendered div currentCityStats
+    ul.append(headerName, dateDisplay, currentTemp,currentHumidity,currentWindspeed, currentUVIndex)
     currentCityStats.append(ul)
 }
 function getGoogleImages(){

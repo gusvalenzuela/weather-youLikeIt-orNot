@@ -5,7 +5,7 @@ body {
   position: relative;
 }
 .current-city-stats{
-  background: rgba(0, 0, 0, 0.50);
+  background: rgba(0, 0, 0, 0.66);
   width: 60%;
   font-size: 1em;
   padding: .5em;
@@ -18,22 +18,29 @@ body {
 }
 .img-size{
   width: 100%;
-  max-height: 500px;
+  max-height: 420px;
+}
+.icon-image{
+  width: 50px; /* width of container */
+  height: 50px; /* height of container */
+  overflow: hidden;
+  margin: -10px 0px 0px;
 }
 .bg-dan{
-  background: red;
+  background: rgba(255, 0, 0, 0.6);
 }
 .bg-ora{
-  background: orange;
+  background: rgba(255, 128, 0, 0.6);
 }
 .bg-war{
-  background: yellow;
+  background: rgba(251, 255, 0, 0.6);
 }
 .bg-vio{
-  background: violet;
+  background: rgba(255, 0, 255, 0.6);
 }
 .bg-suc{
-  background: #3EA72D;
+  color: white;
+  background: rgba(61, 167, 45, 0.6);
 }
 .bg-nature{
   text-align: center;
@@ -42,14 +49,17 @@ body {
   background: url(./assets/images/tim-swaan-eOpewngf68w-unsplash.jpg) black;
   background-position: top;
 }
+#history-list{
+  list-style-type: none;
+}
 #jumbo-custom{
   background: blue;
 }
 /* Width at 576px and below */
 @media screen and (max-width: 576px) {
-  .icon-image{
+  /* .icon-image{
     height: 40px;
-  }
+  } */
   .city-name{
     font-size: 1.5em;
   }
