@@ -4,16 +4,31 @@ const searchInput = $(`#search-input`)
 const searchButton = $(`#search-button`)
 const currentCityStats = $(`#current-city-stats`)
 var cityImageURLs = []
+var searchHistory = []
 var searchTerm;
-var currentCity = {}
+var currentCity;
+// searchHistory = localStorage.getItem(JSON.parse(`weather-app-search-history`))
+
+init()
+
+function init(){
+    searchTerm = `sacramento`
+    currentCity = {}
+    pullWeatherData()
+}
 
 searchForm.submit(function(event){
     event.preventDefault()
+    currentCity = {}
     searchTerm = searchInput[0].value.trim()
     pullWeatherData()
-    getGoogleImages()
-    
+    searchHistory.push(searchTerm)
+    localStorage.setItem(`weather-app-search-history`,JSON.stringify(searchHistory))
 })
+var weatherErr = function weatherError(){
+    searchInput.attr(`style`, `border-style: groove; border-color: red;`).attr(`placeholder`,`ENTER VALID CITY NAME`)
+
+}
 
 function pullWeatherData(){
     var apiKey = `a49df28db557e1be1c568c4992f04aec`
@@ -21,8 +36,10 @@ function pullWeatherData(){
     $.ajax({
         url: "https://api.openweathermap.org/data/2.5/weather?q="+searchTerm+"&appid="+apiKey+"&units=imperial",
         method: "GET",
+        error: weatherErr
     }).then(function(response){
         console.log(`===== WEATHER RESPONSE (RECEIVED) START =====`)
+        searchInput.attr(`style`, ``)
         console.log(response)
 
         currentCity.name = response.name
@@ -35,13 +52,24 @@ function pullWeatherData(){
         console.log(currentCity.timezoneGMT)
         // console.log(`local time in ` + currentCity.name + ` is ` + moment.tz().format(`LLLL`))
     }).then(function(){
+        var ak = `AIzaSyAYlOOGrSdKUf7eEO-W37dOfQJBAbImqvY`
         $.ajax({
-            url: `https://api.openweathermap.org/data/2.5/uvi?appid=`+apiKey+`&lat=`+currentCity.coord.lat+`&lon=`+currentCity.coord.lon,
-            method: `GET`,
+            url: "https://api.openweathermap.org/data/2.5/uvi?lat="+currentCity.coord.lat+"&lon="+currentCity.coord.lon+"&appid="+apiKey,
+            method: "GET",
+            error: printWeatherData(),
         }).then(function(res){
+            console.log(res)
             currentCity.uvIndex = res.value
             console.log(currentCity.uvIndex)
             printWeatherData()
+        })
+        $.ajax({
+            url:"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input="+currentCity.name+"&inputtype=textquery&fields=photos&key="+ak,
+            method: "GET"
+        }).then(function(imgresponse){
+            console.log(currentCity.name)
+            console.log(`===== Google Images Response Rece&ived ======`)
+            console.log(imgresponse)
         })
 
         console.log(`===== WEATHER RESPONSE END =====`)
@@ -51,25 +79,45 @@ function pullWeatherData(){
 }
 
 function printWeatherData(){
+    
     currentCityStats.empty()
     console.log(currentCity)
     console.log(`=====PRINTING...=====`)
     console.log(currentCity.uvIndex)
-    var headerName = $(`<h2>`).attr(`class`,`text-center`).text(currentCity.name)
-    var ul = $(`<ul>`).attr(`class`,`list-group text-left`)
-    var currentTemp = $(`<li>`).attr(`class`,`list-group-item bg-transparent`).attr(`id`,`city-temp`).text(`Temp: `+currentCity.temp)
-    var currentHumidity = $(`<li>`).attr(`class`,`list-group-item bg-transparent`).attr(`id`,`city-humi`).text(`Humidity: `+currentCity.humidity)
-    var currentUVIndex = $(`<li>`).attr(`class`,`list-group-item bg-transparent`).attr(`id`,`city-uvin`).text(`UV Index: `+currentCity.uvIndex)
-    var currentWindspeed = $(`<li>`).attr(`class`,`list-group-item bg-transparent`).attr(`id`,`city-wind`).text(`Wind Speed: `+currentCity.windSpeed)
+    var iconImg = $(`<img>`).attr(`src`, currentCity.icon_url).attr(`height`,`75px;`).attr(`class`,`mx-3 icon-image`)
+    var headerName = $(`<h2>`).attr(`class`,`text-left city-name`).text(currentCity.name).append(iconImg)
+    var ul = $(`<ul>`).attr(`class`,`w-100 list-group text-left`)
+    var currentTemp = $(`<li>`).attr(`class`,`p-1 list-group-item rounded-0 bg-transparent`).attr(`id`,`city-temp`).html(`<i class="font-weight-bold">Temp</i>: `+currentCity.temp)
+    var currentHumidity = $(`<li>`).attr(`class`,`p-1 list-group-item rounded-0 bg-transparent`).attr(`id`,`city-humi`).html(`<i class="font-weight-bold">Humidity</i>: `+currentCity.humidity)
+    var currentUVIndex = $(`<li>`).attr(`class`,`p-1 list-group-item rounded-0 bg-transparent`).attr(`id`,`city-uvin`).html(`<i class="font-weight-bold">UV Index</i>: `+currentCity.uvIndex)
+    var currentWindspeed = $(`<li>`).attr(`class`,`p-1 list-group-item rounded-0 bg-transparent`).attr(`id`,`city-wind`).html(`<i class="font-weight-bold">Wind Speed</i>: `+currentCity.windSpeed)
     
-    if(currentCity.uvIndex > 7){
-        currentUVIndex.attr(`class`, `list-group-item bg-danger`)
-    }else if(currentCity.uvIndex > 3){
-        currentUVIndex.attr(`class`,`list-group-item bg-warning`)
-    } else{
-        currentUVIndex.attr(`class`,`list-group-item bg-success`)
+    switch(Math.floor(currentCity.uvIndex)){
+        case 0:
+        case 1:
+        case 2:
+            currentUVIndex.attr(`class`, `p-1 list-group-item rounded-0 bg-suc text-body`)
+            break
+        case 3:
+        case 4:
+        case 5:
+            currentUVIndex.attr(`class`, `p-1 list-group-item rounded-0 bg-war text-body`)
+            break
+        case 6:
+        case 7:
+            currentUVIndex.attr(`class`,`p-1 list-group-item rounded-0 bg-ora text-body`)
+            break
+        case 8:
+        case 9:
+        case 10:
+            currentUVIndex.attr(`class`,`p-1 list-group-item rounded-0 bg-dan text-body`)
+            break
+        default:
+            currentUVIndex.attr(`class`,`p-1 list-group-item rounded-0 bg-vio text-body`)
+            break
     }
 
+    // append all list items into my UL and finally append that to the prerendered div currentCityStats
     ul.append(headerName, currentTemp,currentHumidity,currentWindspeed, currentUVIndex)
     currentCityStats.append(ul)
 }
@@ -79,13 +127,7 @@ function getGoogleImages(){
 
     // }
     
-    $.ajax({
-        // url:"https://serpapi.com/search?q=Apple&tbm=isch&ijn=0",
-        method: "GET"
-    }).then(function(imgresponse){
-        console.log(`===== Google Images Response Received ======`)
-        console.log(imgresponse)
-    })
+    
 
 }
 

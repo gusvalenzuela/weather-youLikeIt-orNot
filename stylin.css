@@ -5,16 +5,52 @@ body {
   position: relative;
 }
 .current-city-stats{
-  background: rgba(0, 0, 0, 0.33);
+  background: rgba(0, 0, 0, 0.50);
+  width: 60%;
   font-size: 1em;
   padding: .5em;
   color: white;
   text-shadow: 2px black;
   position: absolute;
   bottom: 0;
-  margin-bottom: 1em;
+  margin-bottom: .5em;
   margin-left: .5em;
+}
+.img-size{
+  width: 100%;
+  max-height: 500px;
+}
+.bg-dan{
+  background: red;
+}
+.bg-ora{
+  background: orange;
+}
+.bg-war{
+  background: yellow;
+}
+.bg-vio{
+  background: violet;
+}
+.bg-suc{
+  background: #3EA72D;
+}
+.bg-nature{
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  background: url(./assets/images/tim-swaan-eOpewngf68w-unsplash.jpg) black;
+  background-position: top;
 }
 #jumbo-custom{
   background: blue;
+}
+/* Width at 576px and below */
+@media screen and (max-width: 576px) {
+  .icon-image{
+    height: 40px;
+  }
+  .city-name{
+    font-size: 1.5em;
+  }
 }

@@ -14,17 +14,19 @@
 <body>
     
     <form id="search-form">
-        <div class="row">
-            <div class="col">
-                <label for="search-input">Enter City Name:</label>
-                <input type="text" id="search-input" placeholder="search">
+        <!-- Photo by Rod Long on Unsplash  -->
+        <div class="row px-0 mx-0 mb-4 bg-nature justify-content-center">
+            <div class="col-12 col-md-4 pb-3">
+                <label class="w-100" for="search-input" style="font-size: medium;">Search by City Name:</label>
+                <button type="submit" id="search-button" value="Submit"><i class="fa fa-search"></i></button>
+                <input type="text" id="search-input" placeholder=" ">
                 <!-- <label for="search-input-state">State:</label>
                 <input type="text" id="search-input-state" placeholder="(optional)"> -->
             </div>
-            <div class="col">
-                <label for="search-input-state-zip">or Zip Code:</label>
-                <input type="text" id="search-input-zip" placeholder="(optional)" size="9px">
-                <input type="submit" id="search-button" value="Submit">
+            <div class="col-12 col-md-4 pb-3">
+                <!-- <label class="w-100" for="search-input-state-zip" style="font-size: medium;">or by Zip Code (optional):</label>
+                <button type="submit" id="search-button" value="Submit"><i class="fa fa-search"></i></button>
+                <input type="text" id="search-input-zip" placeholder="" > -->
             </div>
         </div>
     </form>
@@ -33,12 +35,12 @@
 
         <div class="jumbotron jumbotron-fluid py-0 jumbo-custom">
             <div class="row">
-                <div class="col-sm-12 col-md-8" id="current-city-div">
-                    <img src="https://images.unsplash.com/photo-1580953889927-245d1fcd2519?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" class="img-fluid" alt="" >
+                <div class="col-sm-12 col-md-9" id="current-city-div">
+                    <img src="./assets/images/arani-mukherjee-P_zc7lXqXbI-unsplash.jpg" class="img-fluid img-size" alt="">
                     <div class="row current-city-stats" id="current-city-stats"></div>
                 </div>
-                <div class="col-sm-3 col-md-3">history</div>
-                <div class="col-sm-8 col-md-12"> FORECAST</div>
+                <div class="col-sm-3">history</div>
+                <div class="col-sm-9 col-md-12"> FORECAST</div>
             </div>
         </div>
     </div>
