@@ -22,10 +22,16 @@ body {
   max-height: 420px;
 }
 .icon-image{
-  width: 50px; /* width of container */
-  height: 50px; /* height of container */
+  /* width: 100px;  */
+  height: 100%; 
   overflow: hidden;
   margin: -10px 0px 0px;
+}
+.current-temp-display{
+  font-size: xx-large;
+}
+.bottom-stats-headerName{
+  font-size: x-small;
 }
 .bg-dan{
   background: rgba(255, 0, 0, 0.6);
@@ -76,6 +82,16 @@ body {
   } */
   .city-name{
     font-size: 1.5em;
+  }
+  .current-temp-display{
+    font-size: x-large;
+    margin-left: -20px;
+  }
+  .icon-image{
+    width: 60px; 
+    height: 60px; 
+    overflow: hidden;
+    margin: -10px 0px 0px;
   }
   /* #history-div-header{
     background: blueviolet;

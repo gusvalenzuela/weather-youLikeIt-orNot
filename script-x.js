@@ -67,7 +67,7 @@ function pullWeatherData(){
         console.log(response)
 
         currentCity.name = response.name
-        currentCity.temp = response.main.temp + " F°"
+        currentCity.temp = response.main.temp + "° F"
         currentCity.humidity = response.main.humidity + " %"
         currentCity.windSpeed = response.wind.speed + " MPH"
         currentCity.coord = response.coord
@@ -136,29 +136,31 @@ function printWeatherData(){
     
     currentCityStats.empty()
     var iconImg = $(`<img>`).attr(`src`, currentCity.icon_url).attr(`class`,`mx-3 icon-image`)
-    var dateDisplay = $(`<p class="mb-0 text-center" style="font-size: small;">`).text(moment().utcOffset(currentCity.timezoneGMT).format(`llll`))
-    var headerName = $(`<h2>`).attr(`class`,`text-left city-name`).text(currentCity.name).append(iconImg)
+    var dateDisplay = $(`<p class="mb-0 text-center" style="font-size: small;">`).text(moment().utcOffset(currentCity.timezoneGMT).format(`ll`))
+    var headerName = $(`<h2>`).attr(`class`,`text-center city-name`).text(currentCity.name)
     var ul = $(`<ul>`).attr(`class`,`w-100 list-group text-left`)
-    var currentTemp = $(`<li>`).attr(`class`,`p-1 list-group-item rounded-0 bg-transparent`).attr(`id`,`city-temp`).html(`<span class="font-weight-bold">Temp</span>: `+currentCity.temp)
-    var currentHumidity = $(`<li>`).attr(`class`,`p-1 list-group-item rounded-0 bg-transparent`).attr(`id`,`city-humi`).html(`<span class="font-weight-bold">Humidity</span>: `+currentCity.humidity)
-    var currentUVIndex = $(`<li>`).attr(`class`,`p-1 list-group-item rounded-0 bg-transparent`).attr(`id`,`city-uvin`).html(`<span class="font-weight-bold">UV Index</span>: `+currentCity.uvIndex)
-    var currentWindspeed = $(`<li>`).attr(`class`,`p-1 list-group-item rounded-0 bg-transparent`).attr(`id`,`city-wind`).html(`<span class="font-weight-bold">Wind Speed</span>: `+currentCity.windSpeed)
+    var currentTemp = $(`<li>`).attr(`class`,`p-1 list-group-item rounded-0 bg-transparent`).attr(`id`,`city-temp`).html(`<span class="current-temp-display">`+currentCity.temp+`</span>`).prepend(iconImg)
+    var bottomStatsDiv = $(`<div class="row m-1 p-2 text-center">`)
+    var currentHumidity = $(`<div>`).attr(`class`,`col-4 p-1 bg-transparent`).attr(`id`,`city-humi`).html(`<span class="bottom-stats-headerName">Humidity: </span><br>`+currentCity.humidity)
+    var currentUVIndex = $(`<div>`).attr(`class`,`col-4 p-1 bg-transparent`).attr(`id`,`city-uvin`).html(`<span class="bottom-stats-headerName">UV Index: </span><br>`+currentCity.uvIndex)
+    var currentWindspeed = $(`<div>`).attr(`class`,`col-4 p-1 bg-transparent`).attr(`id`,`city-wind`).html(`<span class="bottom-stats-headerName">Wind Speed</span><br>`+currentCity.windSpeed)
    
     var uvin = Math.floor(currentCity.uvIndex)
     if(uvin > 11){
-        currentUVIndex.attr(`class`,`p-1 list-group-item rounded-0 bg-vio`)
+        currentUVIndex.attr(`class`,`col-4 p-1 list-group-item rounded-0 bg-vio`)
     } else if (uvin >= 8){
-        currentUVIndex.attr(`class`,`p-1 list-group-item rounded-0 bg-dan`)
+        currentUVIndex.attr(`class`,`col-4 p-1 list-group-item rounded-0 bg-dan`)
     } else if (uvin >= 6){
-        currentUVIndex.attr(`class`,`p-1 list-group-item rounded-0 bg-ora`)
+        currentUVIndex.attr(`class`,`col-4 p-1 list-group-item rounded-0 bg-ora`)
     } else if (uvin >= 3){
-        currentUVIndex.attr(`class`, `p-1 list-group-item rounded-0 bg-war`)
+        currentUVIndex.attr(`class`, `col-4 p-1 list-group-item rounded-0 bg-war`)
     } else if (uvin >= 0){
-        currentUVIndex.attr(`class`, `p-1 list-group-item rounded-0 bg-suc`)
+        currentUVIndex.attr(`class`, `col-4 p-1 list-group-item rounded-0 bg-suc`)
     } 
 
     // append all list s into my UL and finally append that to the prerendered div currentCityStats
-    ul.append(headerName, dateDisplay, currentTemp,currentHumidity,currentWindspeed, currentUVIndex)
+    bottomStatsDiv.append(currentHumidity, currentWindspeed, currentUVIndex)
+    ul.append(dateDisplay, headerName, currentTemp, bottomStatsDiv)
     currentCityStats.append(ul)
 }
 function printForecastData(){
