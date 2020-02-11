@@ -12,12 +12,11 @@
     <title>Weather App | Home</title>
 </head>
 <body>
-    
     <form id="search-form">
         <!-- Photo by Rod Long on Unsplash  -->
         <div class="row px-0 mx-0 mb-4 bg-nature justify-content-center">
             <div class="col-12 col-md-4 pb-3">
-                <label class="w-100" for="search-input" style="font-size: medium;">Search by City Name:</label>
+                <label class="w-100 font-weight-bold" for="search-input" >Search by City Name:</label>
                 <button type="submit" id="search-button" value="Submit"><i class="fa fa-search"></i></button>
                 <input type="text" id="search-input" placeholder=" ">
                 <!-- <label for="search-input-state">State:</label>
@@ -36,15 +35,30 @@
         <div class="jumbotron jumbotron-fluid py-0 jumbo-custom">
             <div class="row">
                 <div class="col-sm-12 col-md-9 px-0" id="current-city-div">
-                    <img src="./assets/images/arani-mukherjee-P_zc7lXqXbI-unsplash.jpg" class="img-fluid img-size" alt="">
+                    <img src="./assets/images/pedro-lastra-Nyvq2juw4_o-unsplash.jpg" class="img-fluid img-size" alt="">
                     <div class="row current-city-stats" id="current-city-stats"></div>
                 </div>
-                <div class="col-sm-3" id="history-div">history</div>
-                <div class="col-sm-9 col-md-12"> FORECAST</div>
+                <div class="col-5 col-md-3 p-3 bg-transparent" id="history-div">
+                    <!-- <div class="navbar-expand-sm" id="history-div-header">
+                        <span class="lead">Search History:</span>
+                        <button class="navbar-toggler border-none" type="button" data-toggle="collapse" data-target="#history-div">
+                            <span class="fa fa-expand"></span>
+                        </button>
+                    </div> -->
+                    <!-- <div class="collapse navbar-collapse justify-content-end" id="history-div"></div> -->
+                </div>
+                <div class="col-7 col-md-12 p-3 bg-transparent" id="forecast-div">
+                </div>
             </div>
         </div>
     </div>
-    
+
+    <!-- footer  -->
+    <footer class="footer py-2">
+        <div class="container text-center">
+            <span class="text-muted">Copyright &copy; 2020 <a href="https://gusvalenzuela.github.io/gusval-site-bs/portfolio.html" class="text-muted">\\ Gus Valenzuela</a> <a href="https://github.com/gusvalenzuela/weather-youLikeIt-orNot" class="text-dark">\\ code</a></span>
+        </div>
+    </footer>
     
     <!-- moment time JS -->
     <script src="./node_modules/moment/moment.js"></script>
