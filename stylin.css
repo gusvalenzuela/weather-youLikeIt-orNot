@@ -7,7 +7,7 @@ body {
 }
 .current-city-stats{
   background: rgba(0, 0, 0, 0.66);
-  width: 60%;
+  width: 75%;
   font-size: 1em;
   padding: .5em;
   color: white;
@@ -29,6 +29,7 @@ body {
 }
 .current-temp-display{
   font-size: xx-large;
+  margin-left: -20px;
 }
 .bottom-stats-headerName{
   font-size: x-small;
@@ -85,7 +86,6 @@ body {
   }
   .current-temp-display{
     font-size: x-large;
-    margin-left: -20px;
   }
   .icon-image{
     width: 60px; 

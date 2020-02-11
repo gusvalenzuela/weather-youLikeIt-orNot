@@ -138,8 +138,8 @@ function printWeatherData(){
     var iconImg = $(`<img>`).attr(`src`, currentCity.icon_url).attr(`class`,`mx-3 icon-image`)
     var dateDisplay = $(`<p class="mb-0 text-center" style="font-size: small;">`).text(moment().utcOffset(currentCity.timezoneGMT).format(`ll`))
     var headerName = $(`<h2>`).attr(`class`,`text-center city-name`).text(currentCity.name)
-    var ul = $(`<ul>`).attr(`class`,`w-100 list-group text-left`)
-    var currentTemp = $(`<li>`).attr(`class`,`p-1 list-group-item rounded-0 bg-transparent`).attr(`id`,`city-temp`).html(`<span class="current-temp-display">`+currentCity.temp+`</span>`).prepend(iconImg)
+    var ul = $(`<ul>`).attr(`class`,`w-100 list-group text-center`)
+    var currentTemp = $(`<li>`).attr(`class`,`p-1 list-group-item rounded-0 bg-transparent border-none`).attr(`id`,`city-temp`).html(`<span class="current-temp-display">`+currentCity.temp+`</span>`).prepend(iconImg)
     var bottomStatsDiv = $(`<div class="row m-1 p-2 text-center">`)
     var currentHumidity = $(`<div>`).attr(`class`,`col-4 p-1 bg-transparent`).attr(`id`,`city-humi`).html(`<span class="bottom-stats-headerName">Humidity: </span><br>`+currentCity.humidity)
     var currentUVIndex = $(`<div>`).attr(`class`,`col-4 p-1 bg-transparent`).attr(`id`,`city-uvin`).html(`<span class="bottom-stats-headerName">UV Index: </span><br>`+currentCity.uvIndex)
@@ -167,11 +167,11 @@ function printForecastData(){
     forecastDiv.empty()
     var iconImg, temp, humidity, date, div;
     for(k=0;k<currentCity.forecast.length;k++){
-        date = moment().add(1+k,`days`).format('l')
+        date = $(`<p class="text-center">`).text(moment().add(1+k,`days`).format('l'))
         div = $(`<div>`).attr(`class`,`float-left text-left bg-ora m-2 p-3`)
         iconImg = $(`<img>`).attr(`src`, currentCity.forecast[k].icon_url).attr(`class`,`mx-3 icon-image`)
-        temp = $(`<p>`).attr(`class`,`p-1`).html(`<span class="font-weight-bold">Temp</span>: `+currentCity.forecast[k].temp)
-        humidity = $(`<p>`).attr(`class`,`p-1`).html(`<span class="font-weight-bold">humidity</span>: `+currentCity.forecast[k].humidity)
+        temp = $(`<p>`).attr(`class`,`p-1 mb-1`).html(`<span class="font-weight-bold">Temp</span>: `+currentCity.forecast[k].temp)
+        humidity = $(`<p>`).attr(`class`,`p-1 mb-1`).html(`<span class="font-weight-bold">Humidity</span>: `+currentCity.forecast[k].humidity)
         div.append(date,iconImg,temp,humidity)
         forecastDiv.append(div)
     }
