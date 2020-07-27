@@ -26,10 +26,11 @@ header.header {
 .wrapper {
   padding: 0;
   width: 100%;
-  max-width: 850px;
+  max-width: 1200px;
   margin: auto;
 }
 .search-form {
+  padding: 1rem 0;
   width: fit-content;
 }
 .search-form input {
@@ -39,14 +40,14 @@ header.header {
   background-color: transparent;
 }
 .main-content {
-  background: rgba(255, 255, 255, 0.664);
+  background: rgba(255, 255, 255, 0.8);
   display: flex;
   flex-wrap: wrap;
   height: 100%;
   padding: 1.45rem;
 }
 .left-top-side {
-  flex: 1 1 500px;
+  flex: 1 1 576px;
   display: grid;
   /* change min content rows as needed  */
   grid-template-rows: repeat(3, min-content);
@@ -57,14 +58,14 @@ header.header {
 }
 .right-bottom-side {
   padding: 1rem;
-  flex: 1 1 250px;
+  flex: 1 1 416px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .forecast {
-  flex: 1 1 128px;
+  flex: 1 1 240px;
   height: 150px;
   background-color: tomato;
   margin-bottom: 0.5rem;
@@ -76,10 +77,17 @@ header.header {
   flex-wrap: wrap;
   align-content: flex-end;
 }
+.current-stats h3 {
+  margin-bottom: 0;
+}
 .current-stats div {
   text-align: center;
   flex: 1 1 166px;
   padding-bottom: 1rem;
+}
+.current-stats span {
+  font-size: 2rem;
+  font-weight: 800;
 }
 
 .current-city-stats {
