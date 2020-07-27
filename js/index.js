@@ -97,11 +97,13 @@ const render = (city) => {
     `http://openweathermap.org/img/wn/${city.current.weather[0].icon}@2x.png`
   );
   //temp
-  d.querySelector(`#current-temp`).textContent = `${city.current.temp}°F`;
+  d.querySelector(`#current-temp`).textContent = `${city.current.temp.toFixed(
+    0
+  )}°F`;
   // feels like
   d.querySelector(
     `#current-temp-feels`
-  ).textContent = `Feels like: ${city.current.feels_like}°F`;
+  ).textContent = `Feels like: ${city.current.feels_like.toFixed(0)}°F`;
   // humidity
   d.querySelector(
     `#current-humidity`

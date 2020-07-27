@@ -26,7 +26,7 @@ header.header {
 .wrapper {
   padding: 0;
   width: 100%;
-  max-width: 800px;
+  max-width: 850px;
   margin: auto;
 }
 .search-form {
@@ -57,14 +57,14 @@ header.header {
 }
 .right-bottom-side {
   padding: 1rem;
-  flex: 1 1 300px;
+  flex: 1 1 250px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .forecast {
-  flex: 0 1 128px;
+  flex: 1 1 128px;
   height: 150px;
   background-color: tomato;
   margin-bottom: 0.5rem;
@@ -151,10 +151,16 @@ header.header {
 }
 
 /* Width at 768px and below */
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 768px) {
   /* .icon-image{
     height: 40px;
   } */
+  #current-temp {
+    font-size: 6rem;
+  }
+  #current-temp-feels {
+    font-size: 1.5rem;
+  }
   .main-container {
     max-width: 90%;
   }
@@ -163,6 +169,12 @@ header.header {
 @media screen and (max-width: 576px) {
   .main-container {
     max-width: 100%;
+  }
+  #current-temp {
+    font-size: 5.2rem;
+  }
+  #current-temp-feels {
+    font-size: 1rem;
   }
   #current-city-date,
   #current-city-name {
