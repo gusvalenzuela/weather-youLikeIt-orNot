@@ -1,73 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <script defer src="./script-x.js"></script>
-    <!-- font awesome  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="stylin.css">
-    <title>Weather App | Home</title>
-</head>
-<body>
-    <form id="search-form">
-        <!-- Photo by Rod Long on Unsplash  -->
-        <div class="row px-0 mx-0 mb-4 bg-nature justify-content-center">
-            <div class="col-12 col-md-4 pb-3">
-                <label class="w-100 font-weight-bold" for="search-input" >Search by City Name:</label>
-                <button type="submit" id="search-button" value="Submit"><i class="fa fa-search"></i></button>
-                <input type="text" id="search-input" placeholder=" ">
-                <!-- <label for="search-input-state">State:</label>
-                <input type="text" id="search-input-state" placeholder="(optional)"> -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Weather_byGV</title>
+  </head>
+  <body>
+    <!-- header  -->
+    <header class="header">
+      <div class="wrapper">
+        <form class="search-form" id="search-form">
+          <label class="" for="search-input">Search:</label>
+          <input type="text" id="search-input" placeholder="City, State" />
+          <button type="submit" id="search-button" value="Submit">
+            🔍
+          </button>
+        </form>
+      </div>
+    </header>
+
+    <!-- main  -->
+    <main class="wrapper main-container">
+      <div class="main-content">
+        <div class="left-top-side">
+          <p id="current-city-date">Today's date</p>
+          <h1 id="current-city-name">City, ST</h1>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: minmax(150px, auto) 1fr;
+              padding-bottom: 20vh;
+            "
+          >
+            <img
+              src="http://openweathermap.org/img/wn/01d@2x.png"
+              alt="current conditions"
+              id="temp-icon"
+            />
+            <span>
+              <p id="current-temp">97.16°F</p>
+              <p id="current-temp-feels">
+                Feels like: 97.16°F
+              </p>
+            </span>
+          </div>
+          <div class="current-stats" id="current-stats">
+            <div>
+              <h3>Humidity:</h3>
+              <span id="current-humidity">
+                22%
+              </span>
             </div>
-            <div class="col-12 col-md-4 pb-3">
-                <!-- <label class="w-100" for="search-input-state-zip" style="font-size: medium;">or by Zip Code (optional):</label>
-                <button type="submit" id="search-button" value="Submit"><i class="fa fa-search"></i></button>
-                <input type="text" id="search-input-zip" placeholder="" > -->
+            <div>
+              <h3>Wind Speed:</h3>
+              <span id="current-windspeed">
+                6.93 MPH NW
+              </span>
             </div>
+            <div>
+              <h3>UV Index:</h3>
+              <span id="current-uvindex">
+                9.5
+              </span>
+            </div>
+          </div>
+          <!-- <div class="current-city" id="current-city-div">
+            <div class="current-city-stats" id="current-city-stats"></div>
+          </div> -->
         </div>
-    </form>
-
-    <div class="container" id="main-container">
-
-        <div class="jumbotron jumbotron-fluid py-0 jumbo-custom">
-            <div class="row">
-                <div class="col-sm-12 col-md-9 px-0" id="current-city-div">
-                    <img src="./assets/images/pedro-lastra-Nyvq2juw4_o-unsplash.jpg" class="img-fluid img-size" alt="">
-                    <div class="row current-city-stats" id="current-city-stats"></div>
-                </div>
-                <div class="col-5 col-md-3 p-3 bg-transparent" id="history-div">
-                    <!-- <div class="navbar-expand-sm" id="history-div-header">
-                        <span class="lead">Search History:</span>
-                        <button class="navbar-toggler border-none" type="button" data-toggle="collapse" data-target="#history-div">
-                            <span class="fa fa-expand"></span>
-                        </button>
-                    </div> -->
-                    <!-- <div class="collapse navbar-collapse justify-content-end" id="history-div"></div> -->
-                </div>
-                <div class="col-7 col-md-12 p-3 bg-transparent" id="forecast-div">
-                </div>
-            </div>
+        <div class="right-bottom-side">
+          <div class="forecast" id="0"></div>
+          <div class="forecast" id="1"></div>
+          <div class="forecast" id="2"></div>
+          <div class="forecast" id="3"></div>
+          <div class="forecast" id="4"></div>
+          <!-- <div class="" id="forecast-div"></div> -->
         </div>
-    </div>
-
+      </div>
+      <div class="" id="history-div"></div>
+    </main>
     <!-- footer  -->
-    <footer class="footer py-2">
-        <div class="container text-center">
-            <span class="text-muted">Copyright &copy; 2020 <a href="https://gusvalenzuela.github.io/gusval-site-bs/portfolio.html" class="text-muted">\\ Gus Valenzuela</a> <a href="https://github.com/gusvalenzuela/weather-youLikeIt-orNot" class="text-dark">\\ code</a></span>
-        </div>
+    <footer class="footer">
+      <div class="footer-container">
+        <span class="text-muted"
+          >Copyright &copy; 2020
+          <a href="https://gusvalenzuela.com/" class="text-muted"
+            >\\ Gus Valenzuela</a
+          >
+          <a
+            href="https://github.com/gusvalenzuela/weather-youLikeIt-orNot"
+            class="text-dark"
+            >\\ code</a
+          ></span
+        >
+      </div>
     </footer>
-    
-    <!-- moment time JS -->
-    <script src="./node_modules/moment/moment.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <!-- bootstrap optional JS  -->
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    
-    
-</body>
+  </body>
+
+  <!-- S C R I P T S | S C R I P T S -->
+  <!-- moment time JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <!-- bootstrap optional JS  -->
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"
+  ></script>
+  <!-- <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"
+    ></script> -->
+  <script defer src="./js/env.js"></script>
+  <script defer src="./js/index.js"></script>
+  <!-- S C R I P T S | S C R I P T S -->
 </html>
