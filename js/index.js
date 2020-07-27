@@ -5,6 +5,8 @@ const currCitStats = $(`#current-city-stats`);
 const historyDiv = $(`#history-div`);
 const forecastDiv = $(`#forecast-div`);
 const currCit = {};
+const API_KEY = "4S11JlnMWVUPrva4271IE6m3AXotzHMJ";
+const apk = "a49df28db557e1be1c568c4992f04aec";
 var currentCity = {};
 var cityImageURLs = [];
 var searchHistory = [];
@@ -22,11 +24,7 @@ const grabWeather = async (cityname) => {
     // save name to our handy City obj
     City.name = `${Locations[0].adminArea5}, ${Locations[0].adminArea3}`;
     searchHistory.push(City.name); // save search term to history array
-    searchHistory.reverse();
-    let tempSet = new Set([...searchHistory]); //filtering out dupes
-    searchHistory = [];
-    tempSet.forEach((i) => searchHistory.push(i));
-    searchHistory.reverse(); // reverse, reverse!
+    searchHistory = [...new Set(searchHistory.reverse())].reverse(); // filtering out dupes, double reverse to keep most recent up top
     localStorage.setItem(`WbGV-search-history`, JSON.stringify(searchHistory)); // save history to local storage
     // render City data on screen
     render(City);
@@ -85,7 +83,7 @@ const grabCityImage = (city) => {
 };
 
 const render = (city) => {
-  console.log(city);
+  // console.log(city);
   let d = document;
   // city date/time
   d.querySelector(`#current-city-date`).textContent = moment(
@@ -94,16 +92,12 @@ const render = (city) => {
   // city name
   d.querySelector(`#current-city-name`).textContent = city.name;
   // temp image/icon
-  d
-    .querySelector(`#temp-icon`)
-    .setAttribute(
-      `src`,
-      `http://openweathermap.org/img/wn/${city.current.weather[0].icon}@2x.png`
-    );
+  d.querySelector(`#temp-icon`).setAttribute(
+    `src`,
+    `http://openweathermap.org/img/wn/${city.current.weather[0].icon}@2x.png`
+  );
   //temp
-  d.querySelector(
-    `#current-temp`
-  ).textContent = `${city.current.temp}°F`;
+  d.querySelector(`#current-temp`).textContent = `${city.current.temp}°F`;
   // feels like
   d.querySelector(
     `#current-temp-feels`
@@ -154,90 +148,13 @@ function init() {
   grabWeather(`sacramento`);
 }
 
-function pullWeatherData(city) {
-  $.ajax({
-    url:
-      "https://api.openweathermap.org/data/2.5/weather?q=" +
-      city +
-      "&appid=" +
-      apk +
-      "&units=imperial",
-    method: "GET",
-    error: weatherErr,
-  })
-    .then(function (weather) {
-      // searchInput.attr(`style`, ``);
-      console.log(`city weather`, weather);
-
-      currCit.name = weather.name;
-      currCit.temp = weather.main.temp + "° F";
-      currCit.humidity = weather.main.humidity + " %";
-      currCit.windSpeed = weather.wind.speed + " MPH";
-      currCit.coord = weather.coord;
-      currCit.icon_url =
-        `http://openweathermap.org/img/wn/` +
-        weather.weather[0].icon +
-        `@2x.png`;
-      currCit.timezoneGMT = Math.floor(weather.timezone / 60);
-      console.log(currCit.timezoneGMT);
-      // console.log(`local time in ` + currCit.name + ` is ` + moment().utcOffset(currCit.timezoneGMT).format(`ll`))
-    })
-    .then(function () {
-      $.ajax({
-        url:
-          "https://api.openweathermap.org/data/2.5/uvi?lat=" +
-          currCit.coord.lat +
-          "&lon=" +
-          currCit.coord.lon +
-          "&appid=" +
-          apk,
-        method: "GET",
-        error: printWeatherData(),
-      }).then(function (res) {
-        console.log(`uv`, res);
-        currCit.uvIndex = res.value;
-
-        printWeatherData();
-      });
-    });
-
-  $.ajax({
-    url:
-      "https://api.openweathermap.org/data/2.5/forecast?q=" +
-      city +
-      "&appid=" +
-      apk +
-      "&units=imperial",
-    method: "GET",
-    error: weatherErr,
-  })
-    .then(function (fresponse) {
-      // searchInput.attr(`style`, ``);
-      console.log(`forecast:`, fresponse);
-      currCit.forecast = [];
-
-      var g = 0;
-      for (f = 7; f < fresponse.list.length; f += 7) {
-        currCit.forecast[g] = {};
-
-        currCit.forecast[g].temp = fresponse.list[f].main.temp + " F°";
-        currCit.forecast[g].date = fresponse.list[f].dt;
-        currCit.forecast[g].humidity = fresponse.list[f].main.humidity + " %";
-        currCit.forecast[g].icon_url =
-          `http://openweathermap.org/img/wn/` +
-          fresponse.list[f].weather[0].icon +
-          `@2x.png`;
-        g++;
-      }
-    })
-    .then(printForecastData);
-}
-
 function printHistory() {
   // find how to make the list collapsible on sm screens (with classes)
   historyDiv.empty();
 
-  var para = (document.createElement(`p`).textContent = `Search History (click to search again):`);
+  var para = (document.createElement(
+    `p`
+  ).textContent = `Search History (click to search again):`);
   historyDiv.append(para);
   var x = 0;
   // if searchHistory has more than 7 entries only display the latest 7, otherwise display all.
