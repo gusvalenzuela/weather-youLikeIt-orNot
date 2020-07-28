@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./js/place-search.js"></script>
+    <link type="text/css" rel="stylesheet" href="./css/place-search.css" />
     <link rel="stylesheet" href="./css/style.css" />
     <title>Weather_byGV</title>
   </head>
@@ -12,7 +14,8 @@
       <div class="wrapper">
         <form class="search-form" id="search-form">
           <label class="" for="search-input">Search:</label>
-          <input type="text" id="search-input" placeholder="City, State" />
+          <input type="search" id="search-input" placeholder="City, State" />
+          <!-- <input type="text" id="search-input" placeholder="City, State" /> -->
           <button type="submit" id="search-button" value="Submit">
             🔍
           </button>
@@ -24,8 +27,8 @@
     <main class="wrapper main-container">
       <div class="main-content">
         <div class="left-top-side">
-          <p id="current-city-date">Today's date</p>
-          <h1 id="current-city-name">City, ST</h1>
+          <p id="current-city-date">Tue, Jan 01, 1970 12:00 AM</p>
+          <h1 id="current-city-name">Greenwich, LO</h1>
           <div
             style="
               display: grid;
@@ -39,9 +42,9 @@
               id="temp-icon"
             />
             <span>
-              <p id="current-temp">97.16°F</p>
+              <p id="current-temp">00°F</p>
               <p id="current-temp-feels">
-                Feels like: 97.16°F
+                Feels like: 00°F
               </p>
             </span>
           </div>
@@ -49,19 +52,19 @@
             <div>
               <h3>Humidity:</h3>
               <span id="current-humidity">
-                22%
+                00%
               </span>
             </div>
             <div>
               <h3>Wind Speed:</h3>
               <span id="current-windspeed">
-                6.93 MPH NW
+                0.00MPH
               </span>
             </div>
             <div>
               <h3>UV Index:</h3>
               <span id="current-uvindex">
-                9.5
+                0.00
               </span>
             </div>
           </div>
@@ -70,15 +73,47 @@
           </div> -->
         </div>
         <div class="right-bottom-side">
-          <div class="forecast" id="0">Day X Forecast</div>
-          <div class="forecast" id="1">Day X Forecast</div>
-          <div class="forecast" id="2">Day X Forecast</div>
-          <div class="forecast" id="3">Day X Forecast</div>
-          <div class="forecast" id="4">Day X Forecast</div>
+          <div class="forecast" id="0">
+            <p>Day X</p>
+            <p style="color: red;">H: 00°F</p>
+            <p style="color: blue;">L: 00°F</p>
+          </div>
+          <div class="forecast" id="1">
+            <p>Day X</p>
+            <p style="color: red;">H: 00°F</p>
+            <p style="color: blue;">L: 00°F</p>
+          </div>
+          <div class="forecast" id="2">
+            <p>Day X</p>
+            <p style="color: red;">H: 00°F</p>
+            <p style="color: blue;">L: 00°F</p>
+          </div>
+          <div class="forecast" id="3">
+            <p>Day X</p>
+            <p style="color: red;">H: 00°F</p>
+            <p style="color: blue;">L: 00°F</p>
+          </div>
+          <div class="forecast" id="4">
+            <p>Day X</p>
+            <p style="color: red;">H: 00°F</p>
+            <p style="color: blue;">L: 00°F</p>
+          </div>
+          <div class="forecast" id="5">
+            <p>Day X</p>
+            <p style="color: red;">H: 00°F</p>
+            <p style="color: blue;">L: 00°F</p>
+          </div>
+          <div class="forecast" id="6">
+            <p>Day X</p>
+            <p style="color: red;">H: 00°F</p>
+            <p style="color: blue;">L: 00°F</p>
+          </div>
           <!-- <div class="" id="forecast-div"></div> -->
         </div>
       </div>
-      <div class="" id="history-div"></div>
+      <div class="" id="history-div">
+        Search History: (begin your search above)
+      </div>
     </main>
     <!-- footer  -->
     <footer class="footer">
