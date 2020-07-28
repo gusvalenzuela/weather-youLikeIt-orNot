@@ -6,6 +6,8 @@ const historyDiv = $(`#history-div`);
 const forecastDiv = $(`#forecast-div`);
 const currCit = {};
 
+console.log(process.env)
+
 var currentCity = {};
 var cityImageURLs = [];
 var searchHistory = [];
