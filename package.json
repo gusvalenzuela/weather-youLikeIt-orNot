@@ -1,0 +1,25 @@
+{
+  "name": "weatherbygv",
+  "version": "1.0.0",
+  "description": "Web application for searching cities and displaying their weather data.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gusvalenzuela/weather-youLikeIt-orNot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gusvalenzuela/weather-youLikeIt-orNot/issues"
+  },
+  "homepage": "https://github.com/gusvalenzuela/weather-youLikeIt-orNot#readme",
+  "dependencies": {
+    "dotenv": "8.2.0",
+    "express": "4.17.1"
+  }
+}

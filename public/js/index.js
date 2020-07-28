@@ -5,7 +5,7 @@ const currCitStats = $(`#current-city-stats`);
 const historyDiv = $(`#history-div`);
 const forecastDiv = $(`#forecast-div`);
 const currCit = {};
-console.log(API_KEY)
+
 var currentCity = {};
 var cityImageURLs = [];
 var searchHistory = [];
@@ -42,7 +42,9 @@ var weatherErr = function weatherError() {
 
 const convertToCoords = (searchterm) => {
   return new Promise((resolve) => {
-    const URL = `https://www.mapquestapi.com/geocoding/v1/address?key=${MQ_API_KEY}&location=${searchterm}`;
+    const URL = `https://www.mapquestapi.com/geocoding/v1/address?key=${
+      MQ_API_KEY || process.env.MQ_API_KEY
+    }&location=${searchterm}`;
     convertRequest.open("GET", URL, true);
     convertRequest.send();
     convertRequest.onloadend = () => {
@@ -54,7 +56,9 @@ const convertToCoords = (searchterm) => {
 const pullsiez = ({ lat, lng: lon }) => {
   return new Promise((resolve, rej) => {
     let URL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&
-    exclude=minutely,hourly&appid=${apk}&units=imperial`;
+    exclude=minutely,hourly&appid=${
+      OW_API_KEY || process.env.OW_API_KEY
+    }&units=imperial`;
     request.open("GET", URL, true);
     request.send(); // Send request
     request.onloadend = function () {
@@ -94,7 +98,7 @@ const render = (city) => {
   // temp image/icon
   d.querySelector(`#temp-icon`).setAttribute(
     `src`,
-    `http://openweathermap.org/img/wn/${city.current.weather[0].icon}@2x.png`
+    `https://openweathermap.org/img/wn/${city.current.weather[0].icon}@2x.png`
   );
   //temp
   d.querySelector(`#current-temp`).textContent = `${city.current.temp.toFixed(
@@ -221,7 +225,7 @@ function init() {
   grabWeather(`sacramento`);
 
   placeSearch({
-    key: MQ_API_KEY,
+    key: MQ_API_KEY || process.env.MQ_API_KEY,
     container: searchInput,
     useDeviceLocation: true,
     collection: ["address", "adminArea"],
