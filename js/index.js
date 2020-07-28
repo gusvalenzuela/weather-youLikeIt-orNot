@@ -5,9 +5,7 @@ const currCitStats = $(`#current-city-stats`);
 const historyDiv = $(`#history-div`);
 const forecastDiv = $(`#forecast-div`);
 const currCit = {};
-
-console.log(process.env)
-
+console.log(API_KEY)
 var currentCity = {};
 var cityImageURLs = [];
 var searchHistory = [];
