@@ -1,26 +1,56 @@
 {
-  "name": "weatherbygv",
-  "version": "1.0.0",
-  "description": "Web application for searching cities and displaying their weather data.",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "dev": "nodemon server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gusvalenzuela/weather-youLikeIt-orNot.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/gusvalenzuela/weather-youLikeIt-orNot/issues"
-  },
-  "homepage": "https://github.com/gusvalenzuela/weather-youLikeIt-orNot#readme",
-  "dependencies": {
-    "dotenv": "8.2.0",
-    "express": "4.17.1"
-  }
+	"name": "weatherbygv",
+	"version": "1.0.0",
+	"description": "Web application for searching cities and displaying their weather data.",
+	"main": "server.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "concurrently \"webpack --mode=development --watch\" \"nodemon server.js\"",
+		"format": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|css)\"",
+		"lint": "eslint --ignore-path .gitignore .",
+		"validate": "npm run format && npm run lint",
+		"start": "node server.js",
+		"build": "webpack --config webpack.config.js --mode=production"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/gusvalenzuela/weather-youLikeIt-orNot.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/gusvalenzuela/weather-youLikeIt-orNot/issues"
+	},
+	"homepage": "https://github.com/gusvalenzuela/weather-youLikeIt-orNot#readme",
+	"dependencies": {
+		"@babel/preset-env": "7.10.4",
+		"core-js": "3.6.5",
+		"dotenv": "8.2.0",
+		"eslint": "7.5.0",
+		"express": "4.17.1",
+		"if-env": "1.0.4",
+		"regenerator-runtime": "0.13.7",
+		"webpack-dev-server": "3.11.0"
+	},
+	"devDependencies": {
+		"@10up/stylelint-config": "1.0.9",
+		"babel-core": "6.26.3",
+		"babel-loader": "8.1.0",
+		"babel-preset-env": "1.7.0",
+		"clean-webpack-plugin": "3.0.0",
+		"concurrently": "5.2.0",
+		"css-loader": "4.1.0",
+		"eslint-config-prettier": "6.11.0",
+		"eslint-loader": "4.0.2",
+		"file-loader": "6.0.0",
+		"postcss": "7.0.32",
+		"prettier": "2.0.5",
+		"style-loader": "1.2.1",
+		"stylelint": "13.6.1",
+		"stylelint-webpack-plugin": "2.1.0",
+		"url-loader": "4.1.0",
+		"webpack": "4.44.0",
+		"webpack-cli": "3.3.12"
+	}
 }

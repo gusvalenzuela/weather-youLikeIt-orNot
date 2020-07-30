@@ -1,0 +1,281 @@
+html,
+body {
+	height: 100%;
+	margin: 0;
+	min-height: 100%;
+}
+
+:root {
+	--black80: #000c;
+	--black100: #000f;
+	--white80: #fffc;
+	--white100: #ffff;
+	--darkgray: #333;
+	--blue: #00f;
+	--babyblue: #75c1ff;
+	--lightgray: #aaa;
+	--violet80: #ee82eecc;
+	--red80: #f00c;
+	--green80: #008000cc;
+	--yellow80: #ff0c;
+	--orange80: #ffa500cc;
+}
+
+body {
+	background-image: url("../images/cityscape.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: grid;
+	font-family:
+		-apple-system,
+		BlinkMacSystemFont,
+		"Segoe UI",
+		Roboto,
+		Oxygen-Sans,
+		Ubuntu,
+		Cantarell,
+		"Helvetica Neue",
+		sans-serif;
+	grid-template-rows: auto 1fr auto;
+}
+
+header.header {
+	align-content: end;
+	display: grid;
+	height: fit-content;
+	justify-self: center;
+	min-height: 4vh;
+	padding: 1rem 0 0.5rem;
+}
+
+.wrapper {
+	margin: auto;
+	max-width: 1200px;
+	padding: 0;
+	width: 100%;
+}
+
+.search-form {
+	display: flex;
+	padding: 1rem 0;
+	width: fit-content;
+}
+
+.search-form label {
+	align-self: center;
+}
+
+.search-form input {
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid var(--black100);
+
+	/* width: 200px; */
+}
+
+.main-content {
+	background: rgba(255, 255, 255, 0.8);
+	display: flex;
+	flex-wrap: wrap;
+	height: 100%;
+	padding: 1.45rem;
+}
+
+.left-top-side {
+	display: grid;
+	flex: 1 1 576px;
+
+	/* change min content rows as needed  */
+	grid-template-rows: repeat(3, min-content);
+}
+
+.left-top-side p,
+.left-top-side h1 {
+	margin: 0;
+}
+
+.right-bottom-side {
+	display: flex;
+	flex: 1 1 416px;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding: 1rem;
+}
+
+.forecast {
+
+	/* height: 150px; */
+	background-color: var(--babyblue);
+	flex: 1 1 100px;
+	margin-bottom: 0.5rem;
+	margin-right: 0.5rem;
+	padding: 1rem;
+	text-align: center;
+}
+
+.forecast p {
+	margin: 0.25rem;
+}
+
+.current-stats {
+	align-content: flex-end;
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+}
+
+.current-stats h3 {
+	margin-bottom: 0;
+}
+
+.current-stats div {
+	flex: 1 1 50px;
+	padding-bottom: 1rem;
+	text-align: center;
+}
+
+.current-stats span {
+	font-size: 2rem;
+	font-weight: 800;
+}
+
+.current-city-stats {
+	background: rgba(0, 0, 0, 0.66);
+	color: var(--white100);
+	font-size: 1em;
+
+	/* position: absolute; */
+
+	/* bottom: 0; */
+	margin-bottom: 0.5em;
+	margin-left: 0.5em;
+	padding: 0.5em;
+	text-shadow: 2px #000;
+	width: 100%;
+}
+
+.uvi-violet {
+	background-color: var(--violet80);
+}
+
+.uvi-red {
+	background-color: var(--red80);
+}
+
+.uvi-orange {
+	background-color: var(--orange80);
+}
+
+.uvi-yellow {
+	background-color: var(--yellow80);
+}
+
+.uvi-green {
+	background-color: var(--green80);
+}
+
+.img-size {
+	max-height: 420px;
+	width: 100%;
+}
+
+#current-temp {
+	font-size: 7rem;
+}
+
+#current-temp-feels {
+	font-size: 2rem;
+}
+
+#temp-icon {
+	justify-self: center;
+	place-self: center;
+	-webkit-transform: scale(2);
+	-moz-transform: scale(2);
+	-o-transform: scale(2);
+	-ms-transform: scale(2);
+	transform: scale(2);
+}
+
+#history-div {
+	background-color: var(--white100);
+	padding: 0.5rem;
+}
+
+.history-list-items {
+	background: transparent;
+	border: none;
+	text-decoration: underline;
+}
+
+.history-list-items:hover {
+	color: var(--blue);
+	cursor: pointer;
+}
+
+.history-list-items:active {
+	background: #ff000075;
+}
+
+.footer {
+	background-color: var(--white80);
+	padding: 1rem 0 2.25rem;
+	text-align: center;
+}
+
+/* Width at 768px and below */
+@media screen and (max-width: 768px) {
+
+	/* .icon-image{
+    height: 40px;
+  } */
+	#current-temp {
+		font-size: 6rem;
+	}
+
+	#current-temp-feels {
+		font-size: 1.5rem;
+	}
+
+	.current-stats span {
+		font-size: 1.6rem;
+	}
+
+	.main-container {
+		max-width: 90%;
+	}
+}
+
+/* Width at 576px and below */
+@media screen and (max-width: 576px) {
+
+	.main-container {
+		max-width: 100%;
+	}
+
+	#current-temp {
+		font-size: 5.2rem;
+	}
+
+	#current-temp-feels {
+		font-size: 1rem;
+	}
+
+	#current-city-date,
+	#current-city-name {
+		text-align: center;
+	}
+
+	.current-stats span {
+		font-size: 1rem;
+	}
+}
+
+/* Width at 1220px  and above */
+@media screen and (min-width: 1220px) {
+
+	/* .icon-image{
+    height: 40px;
+  } */
+}
