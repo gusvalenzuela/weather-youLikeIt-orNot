@@ -10,21 +10,17 @@ var config = {
 	entry: {
 		index: "./src/js/index.js",
 		// style: "./src/css/style.css",
-		// placeSearch: "./src/js/place-search.js",
-		// dashboard: "./src/js/style.js",
 	},
 	output: {
-		path: __dirname + "/public",
-		publicPath: "/",
+		path: __dirname + "/client/dist",
+		publicPath: "/dist",
 	},
 	plugins: [
+		new CleanWebpackPlugin(),
 		new StyleLintPlugin({
 			configFile: ".stylelintrc", // if your config is in a non-standard place
 			files: "src/**/*.css", // location of your CSS files
 			fix: true, // if you want to auto-fix some of the basic rules
-		}),
-		new CleanWebpackPlugin({
-			verbose: true,
 		}),
 	],
 	module: {
@@ -36,17 +32,7 @@ var config = {
 			},
 			{
 				test: /\.css$/i,
-				use: [
-					"style-loader",
-					{
-						loader: "css-loader",
-						options: {
-							// Run `postcss-loader` on each CSS `@import`, do not forget that `sass-loader` compile non CSS `@import`'s into a single file
-							// If you need run `sass-loader` and `postcss-loader` on each CSS `@import` please set it to `2`
-							importLoaders: 1,
-						},
-					},
-				],
+				use: ["style-loader", "css-loader"],
 			},
 			{
 				test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
@@ -56,10 +42,11 @@ var config = {
 						options: {
 							name: "[name].[ext]",
 							outputPath: "images",
+							publicPath: "/dist/images",
 						},
 					},
 				],
-				include: path.join(__dirname, "/src/images"),
+				include: path.join(__dirname, "/src"),
 			},
 		],
 	},

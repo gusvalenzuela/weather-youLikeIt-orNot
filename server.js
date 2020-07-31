@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 3700
 require("dotenv").config()
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-app.use(express.static("public"))
+app.use(express.static("client"))
 
 app.get("*", (req, res) => {
 	res.sendFile(path.join(__dirname, "./views/index.html"))
