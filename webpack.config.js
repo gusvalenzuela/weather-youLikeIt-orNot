@@ -16,7 +16,7 @@ var config = {
 		publicPath: "/dist",
 	},
 	plugins: [
-		new CleanWebpackPlugin(),
+		new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
 		new StyleLintPlugin({
 			configFile: ".stylelintrc", // if your config is in a non-standard place
 			files: "src/**/*.css", // location of your CSS files

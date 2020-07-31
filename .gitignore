@@ -2,7 +2,8 @@ node_modules/
 
 env.js
 .planning/
-client/
+.ship/
+dist/
 
 
 .github/
