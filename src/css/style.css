@@ -12,18 +12,17 @@ body {
 	--white100: #ffff;
 	--darkgray: #333;
 	--blue: #00f;
-	--babyblue: #75c1ff;
+	--babyblue: #90cdff;
 	--lightgray: #aaa;
-	--violet80: #ee82eecc;
-	--red80: #f00c;
-	--green80: #008000cc;
-	--yellow80: #ff0c;
-	--orange80: #ffa500cc;
+	--violet50: #ee82ee77;
+	--red50: #f007;
+	--green50: #00800077;
+	--yellow50: #ff07;
+	--orange50: #ffa60077;
 }
 
 body {
-
-	background-image: url("../images/cityscape.jpg");
+	background-image: url("../images/cityscape.webp");
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -157,23 +156,23 @@ header.header {
 }
 
 .uvi-violet {
-	background-color: var(--violet80);
+	background-color: var(--violet50);
 }
 
 .uvi-red {
-	background-color: var(--red80);
+	background-color: var(--red50);
 }
 
 .uvi-orange {
-	background-color: var(--orange80);
+	background-color: var(--orange50);
 }
 
 .uvi-yellow {
-	background-color: var(--yellow80);
+	background-color: var(--yellow50);
 }
 
 .uvi-green {
-	background-color: var(--green80);
+	background-color: var(--green50);
 }
 
 .img-size {

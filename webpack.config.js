@@ -35,7 +35,7 @@ var config = {
 				use: ["style-loader", "css-loader"],
 			},
 			{
-				test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
+				test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2|webp)$/i,
 				use: [
 					{
 						loader: "file-loader",

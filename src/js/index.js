@@ -179,7 +179,7 @@ function init() {
 	placeSearch({
 		key: `4S11JlnMWVUPrva4271IE6m3AXotzHMJ`,
 		container: searchInput,
-		useDeviceLocation: true,
+		useDeviceLocation: false,
 		collection: ["address", "adminArea"],
 	})
 	// L I S T E N E R S
