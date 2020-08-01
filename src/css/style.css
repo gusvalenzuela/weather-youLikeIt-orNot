@@ -25,7 +25,7 @@ body {
 	background-color: var(--lightgray);
 	background-image: url("../images/weather.png");
 	background-repeat: repeat;
-	background-size: cover;
+	/* background-size: cover; */
 	display: grid;
 	font-family:
 		-apple-system,
