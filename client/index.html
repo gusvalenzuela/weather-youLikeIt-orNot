@@ -18,104 +18,87 @@
 	<body>
 		<!-- header  -->
 		<header class="header">
-			<div class="wrapper">
-				<form class="search-form" id="search-form">
-					<label class="" for="search-input">Search:</label>
-					<input type="search" id="search-input" placeholder="City, State" />
-					<!-- <input type="text" id="search-input" placeholder="City, State" /> -->
-					<button type="submit" id="search-button" value="Submit">
-						🔍
-					</button>
-				</form>
-			</div>
+			<form class="search-form" id="search-form">
+				<label class="" for="search-input">Search:</label>
+				<input type="search" id="search-input" placeholder="City, State" />
+				<!-- <input type="text" id="search-input" placeholder="City, State" /> -->
+				<button type="submit" id="search-button" value="Submit">
+					🔍
+				</button>
+			</form>
 		</header>
 
 		<!-- main  -->
 		<main class="wrapper main-container">
 			<div class="main-content">
 				<div class="left-top-side">
-					<p id="current-city-date">Tue, Jan 01, 1970 12:00 AM</p>
-					<h1 id="current-city-name">Greenwich, LO</h1>
+					<h1 id="current-city-name">Monterey, CA</h1>
+					<h3 id="current-city-date">Tue Jan 1st 12:00 AM</h3>
 					<div
 						style="
 							display: grid;
-							grid-template-columns: minmax(150px, auto) 1fr;
-							padding-bottom: 15px;
+							grid-template-columns: auto minmax(150px, 1fr);
+							padding: 1.5rem 0;
 						"
 					>
 						<img
-							src="https://openweathermap.org/img/wn/01d@2x.png"
+							src="./icons/03d.svg"
 							alt="current conditions"
 							id="temp-icon"
 						/>
-						<span>
+						<span style="width: min-content;">
 							<p id="current-temp">00°F</p>
 							<p id="current-temp-feels">
 								Feels like: 00°F
 							</p>
+							<p id="current-humidity">HUMIDITY: <b>00%</b></p>
+							<p id="current-windspeed">WIND SPEED: <b>0.00MPH</b></p>
+							<p id="current-uvindex">UV INDEX: <b>0.00</b></p>
 						</span>
 					</div>
-					<div class="current-stats" id="current-stats">
-						<div>
-							<h3>Humidity:</h3>
-							<span id="current-humidity">
-								00%
-							</span>
-						</div>
-						<div>
-							<h3>Wind Speed:</h3>
-							<span id="current-windspeed">
-								0.00MPH
-							</span>
-						</div>
-						<div>
-							<h3>UV Index:</h3>
-							<span id="current-uvindex">
-								0.00
-							</span>
-						</div>
-					</div>
+					<!-- <div class="current-stats" id="current-stats">
+						
+					</div> -->
 					<!-- <div class="current-city" id="current-city-div">
             <div class="current-city-stats" id="current-city-stats"></div>
           </div> -->
 				</div>
 				<div class="right-bottom-side">
-					<div class="forecast" id="0">
-						<p>Day X</p>
-						<p style="color: red;">H: 00°F</p>
-						<p style="color: blue;">L: 00°F</p>
-					</div>
 					<div class="forecast" id="1">
 						<p>Day X</p>
-						<p style="color: red;">H: 00°F</p>
-						<p style="color: blue;">L: 00°F</p>
+						<p style="color: darkred;">H: 00°F</p>
+						<p style="color: darkblue;">L: 00°F</p>
 					</div>
 					<div class="forecast" id="2">
 						<p>Day X</p>
-						<p style="color: red;">H: 00°F</p>
-						<p style="color: blue;">L: 00°F</p>
+						<p style="color: darkred;">H: 00°F</p>
+						<p style="color: darkblue;">L: 00°F</p>
 					</div>
 					<div class="forecast" id="3">
 						<p>Day X</p>
-						<p style="color: red;">H: 00°F</p>
-						<p style="color: blue;">L: 00°F</p>
+						<p style="color: darkred;">H: 00°F</p>
+						<p style="color: darkblue;">L: 00°F</p>
 					</div>
 					<div class="forecast" id="4">
 						<p>Day X</p>
-						<p style="color: red;">H: 00°F</p>
-						<p style="color: blue;">L: 00°F</p>
+						<p style="color: darkred;">H: 00°F</p>
+						<p style="color: darkblue;">L: 00°F</p>
 					</div>
 					<div class="forecast" id="5">
 						<p>Day X</p>
-						<p style="color: red;">H: 00°F</p>
-						<p style="color: blue;">L: 00°F</p>
+						<p style="color: darkred;">H: 00°F</p>
+						<p style="color: darkblue;">L: 00°F</p>
 					</div>
 					<div class="forecast" id="6">
 						<p>Day X</p>
-						<p style="color: red;">H: 00°F</p>
-						<p style="color: blue;">L: 00°F</p>
+						<p style="color: darkred;">H: 00°F</p>
+						<p style="color: darkblue;">L: 00°F</p>
 					</div>
-					<!-- <div class="" id="forecast-div"></div> -->
+					<div class="forecast" id="7">
+						<p>Day X</p>
+						<p style="color: darkred;">H: 00°F</p>
+						<p style="color: darkblue;">L: 00°F</p>
+					</div>
 				</div>
 			</div>
 			<div class="" id="history-div">
@@ -143,6 +126,20 @@
 						class="text-dark"
 						>\\ code</a
 					></span
+				>
+			</div>
+			<div style="padding-top: 10px; font-size: small;">
+				Weather icons made by
+				<a href="http://www.freepik.com/" title="Freepik">Freepik</a>
+				from
+				<a href="https://www.flaticon.com/" title="Flaticon">
+					www.flaticon.com</a
+				>
+				| Wallpaper by
+				<a
+					href="https://www.toptal.com/designers/subtlepatterns/weather/"
+					title="Freepik"
+					>Asian Zamanloo</a
 				>
 			</div>
 		</footer>

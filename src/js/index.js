@@ -7,6 +7,7 @@ const searchForm = document.querySelector(`#search-form`)
 const searchInput = document.querySelector(`#search-input`)
 const historyDiv = $(`#history-div`)
 var searchHistory = []
+var currentCityTZ = 0
 // Create a request variable and assign a new XMLHttpRequest object to it.
 var request = new XMLHttpRequest()
 var convertRequest = new XMLHttpRequest()
@@ -56,7 +57,9 @@ const pullsiez = ({ lat, lng: lon }) => {
 		}
 	})
 }
-
+const getTime = () => {
+	return moment().utcOffset(currentCityTZ).format(`ddd MMM Do LT`)
+}
 // const grabCityImage = city => {
 // 	//   $.ajax({
 // 	//     url:
@@ -74,17 +77,18 @@ const pullsiez = ({ lat, lng: lon }) => {
 const render = city => {
 	console.log(city)
 	let d = document
+	// storing the currently selected city's timezone in global for refreshing
 	// city date/time
-	d.querySelector(`#current-city-date`).textContent = moment
-		.unix(city.current.dt)
-		// .utcOffset(city.timezone_offset)
-		.format(`llll`)
+	// this is updated every second
+	currentCityTZ = city.timezone_offset / 60
+
 	// city name
 	d.querySelector(`#current-city-name`).textContent = city.name
 	// temp image/icon
 	d.querySelector(`#temp-icon`).setAttribute(
 		`src`,
-		`https://openweathermap.org/img/wn/${city.current.weather[0].icon}@2x.png`,
+		`./icons/${city.current.weather[0].icon}.svg`,
+		// `https://openweathermap.org/img/wn/${city.current.weather[0].icon}@2x.png`,
 	)
 	//temp
 	d.querySelector(`#current-temp`).textContent = `${city.current.temp.toFixed(
@@ -95,43 +99,52 @@ const render = city => {
 		`#current-temp-feels`,
 	).textContent = `Feels like: ${city.current.feels_like.toFixed(0)}°F`
 	// humidity
-	d.querySelector(`#current-humidity`).textContent = `${city.current.humidity}%`
+	d.querySelector(
+		`#current-humidity`,
+	).innerHTML = `HUMIDITY: <b>${city.current.humidity}%</b>`
 	// wind
 	d.querySelector(
 		`#current-windspeed`,
-	).textContent = `${city.current.wind_speed}MPH`
+	).innerHTML = `WIND SPEED: <b>${city.current.wind_speed}MPH</b>`
 	// color coding uvi-index div
 	if (city.current.uvi) {
 		let uviElement = d.querySelector(`#current-uvindex`)
-		uviElement.textContent = city.current.uvi // setting the text content
+		uviElement.innerHTML = `UV INDEX: <b>${city.current.uvi}</b>` // setting the text content
 
 		const uvi = Math.floor(city.current.uvi)
 		// changing bg-color of parent element (div)
 		if (uvi > 11) {
-			uviElement.parentElement.className = `uvi-violet`
+			uviElement.className = `uvi-violet`
 		} else if (uvi >= 8) {
-			uviElement.parentElement.className = `uvi-red`
+			uviElement.className = `uvi-red`
 		} else if (uvi >= 6) {
-			uviElement.parentElement.className = `uvi-orange`
+			uviElement.className = `uvi-orange`
 		} else if (uvi >= 3) {
-			uviElement.parentElement.className = `uvi-yellow`
+			uviElement.className = `uvi-yellow`
 		} else if (uvi >= 0) {
-			uviElement.parentElement.className = `uvi-green`
+			uviElement.className = `uvi-green`
 		}
 	}
 
 	// forecast
 	city.daily.forEach((day, ind) => {
-		// show only 7 days
-		if (ind > 6) {
+		// show only last 7 days
+		if (ind < 1) {
 			return
-		}
-		// grab each forecast div by id
-		let div = document.querySelector(`.forecast[id="${ind}"]`)
+		} else {
+			// grab each forecast div by id
+			let div = document.querySelector(`.forecast[id="${ind}"]`)
 
-		div.innerHTML = `<p>Day ${Number(div.id) + 1}</p>
-    <p style="color: red">H: ${day.temp.max.toFixed(0)}°F</p>
-    <p style="color: blue">L: ${day.temp.min.toFixed(0)}°F</p>`
+			div.innerHTML = `
+			<p>${moment.unix(day.dt).utcOffset(currentCityTZ).format("dddd, M/D")}</p>
+			<img src="./icons/${day.weather[0].icon}.svg"/>
+			<p style="float:right;">
+			<span style="color: red">H:</span> ${day.temp.max.toFixed(0)}°F
+			<br/>
+			<span style="color: blue">L:</span> ${day.temp.min.toFixed(0)}°F
+			</p>
+			`
+		}
 	})
 }
 
@@ -155,7 +168,7 @@ function printHistory() {
 		// if last item, don't append a dash
 		span.innerHTML = `<button class="history-list-items">${
 			searchHistory[i]
-		}</button>${i > x + 1 ? " -" : ""}`
+		}</button>${i > x + 1 ? "|" : ""}`
 		historyDiv.append(span)
 	}
 }
@@ -174,12 +187,18 @@ function init() {
 		searchHistory = JSON.parse(localStorage.getItem(`WbGV-search-history`))
 		printHistory()
 	}
-	grabWeather(`sacramento`)
+	grabWeather(`monterey`)
+
+	// refreshes the time displayed every second
+	// the time is changed in function via the timezone set in "grab weather"
+	setInterval(() => {
+		document.querySelector(`#current-city-date`).textContent = `${getTime()}`
+	}, 1000)
 
 	placeSearch({
 		key: `4S11JlnMWVUPrva4271IE6m3AXotzHMJ`,
 		container: searchInput,
-		useDeviceLocation: false,
+		limit: 7,
 		collection: ["address", "adminArea"],
 	})
 	// L I S T E N E R S
@@ -198,9 +217,5 @@ function init() {
 
 		// grab data from weather api
 		grabWeather(searchInput.value.trim().toLowerCase())
-	})
-
-	searchInput.addEventListener("results", e => {
-		console.log(e)
 	})
 }

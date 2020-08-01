@@ -16,7 +16,7 @@ var config = {
 		publicPath: "/dist",
 	},
 	plugins: [
-		new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
+		new CleanWebpackPlugin(),
 		new StyleLintPlugin({
 			configFile: ".stylelintrc", // if your config is in a non-standard place
 			files: "src/**/*.css", // location of your CSS files
@@ -53,12 +53,12 @@ var config = {
 }
 
 module.exports = (env, argv) => {
-	console.log(env)
 	if (argv.mode === "development") {
 		config.devtool = "inlinesource-map"
 	}
 
 	if (argv.mode === "production") {
+		console.log(env)
 		//...
 	}
 
