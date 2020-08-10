@@ -101,15 +101,15 @@ const render = city => {
 	// humidity
 	d.querySelector(
 		`#current-humidity`,
-	).innerHTML = `HUMIDITY: <b>${city.current.humidity}%</b>`
+	).innerHTML = `Humidity: <b>${city.current.humidity}%</b>`
 	// wind
 	d.querySelector(
 		`#current-windspeed`,
-	).innerHTML = `WIND SPEED: <b>${city.current.wind_speed}MPH</b>`
+	).innerHTML = `Wind Speed: <b>${city.current.wind_speed}MPH</b>`
 	// color coding uvi-index div
 	if (city.current.uvi) {
 		let uviElement = d.querySelector(`#current-uvindex`)
-		uviElement.innerHTML = `UV INDEX: <b>${city.current.uvi}</b>` // setting the text content
+		uviElement.innerHTML = city.current.uvi // setting the text content
 
 		const uvi = Math.floor(city.current.uvi)
 		// changing bg-color of parent element (div)

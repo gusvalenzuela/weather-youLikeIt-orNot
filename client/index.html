@@ -46,15 +46,27 @@
 							alt="current conditions"
 							id="temp-icon"
 						/>
-						<span style="width: min-content;">
+						<div class="current-stats" style="width: min-content;">
 							<p id="current-temp">00°F</p>
 							<p id="current-temp-feels">
 								Feels like: 00°F
 							</p>
-							<p id="current-humidity">HUMIDITY: <b>00%</b></p>
-							<p id="current-windspeed">WIND SPEED: <b>0.00MPH</b></p>
-							<p id="current-uvindex">UV INDEX: <b>0.00</b></p>
-						</span>
+							<p id="current-humidity">Humidity: <b>00%</b></p>
+							<p id="current-windspeed">Wind Speed: <b>0.00MPH</b></p>
+							<p>
+								UV Index:
+								<b class="current-uvindex" id="current-uvindex">0.00</b>
+								<button onclick="openUVRange()" id="open-range-btn">
+									?
+								</button>
+							</p>
+							<img
+								style="display: none;"
+								id="current-uvindex-img"
+								src="./images/UV-index-scale-mini.jpg"
+								class="current-uvindex-img"
+							/>
+						</div>
 					</div>
 					<!-- <div class="current-stats" id="current-stats">
 						
@@ -161,5 +173,17 @@
 	></script> -->
 	<!-- <script defer src="./js/env.js"></script> -->
 	<script defer src="./dist/index.js"></script>
+	<script>
+		const openUVRange = () => {
+			let display = document.getElementById("current-uvindex-img").style.display
+			console.log(display)
+
+			display === "none"
+				? (document.getElementById("current-uvindex-img").style.display =
+						"block")
+				: (document.getElementById("current-uvindex-img").style.display =
+						"none")
+		}
+	</script>
 	<!-- S C R I P T S | S C R I P T S -->
 </html>
