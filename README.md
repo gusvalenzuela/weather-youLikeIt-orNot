@@ -2,7 +2,7 @@
 
 > Full-stack web application for searching cities and displaying their weather data.
 
-## [Check the weather!](bit.ly/39pwhkc)
+## [Check the weather!](https://bit.ly/31aTaNS)
 
 # User Story:
 
