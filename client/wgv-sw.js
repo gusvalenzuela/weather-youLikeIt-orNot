@@ -1,33 +1,15 @@
 /*global Promise*/
 /*eslint no-undef: "error"*/
-const CACHE_NAME = "weatherbyGV-static-cache-v1"
+const CACHE_NAME = "weatherbyGV-static-cache-v3"
 const FILES_TO_CACHE = [
 	"/",
+	"/icons/favicon.ico",
 	"/index.html",
 	"/images/UV-index-scale-mini.jpg",
 	"/dist/index.js",
 	"/dist/weather.png",
-	// load from path in future
-	"/icons/01d.svg",
-	"/icons/01n.svg",
-	"/icons/02d.svg",
-	"/icons/02n.svg",
-	"/icons/03d.svg",
-	"/icons/03n.svg",
-	"/icons/04d.svg",
-	"/icons/04n.svg",
-	"/icons/09d.svg",
-	"/icons/09n.svg",
-	"/icons/10d.svg",
-	"/icons/10n.svg",
-	"/icons/11d.svg",
-	"/icons/11n.svg",
-	"/icons/13d.svg",
-	"/icons/13n.svg",
-	"/icons/50d.svg",
-	"/icons/50n.svg",
 ]
-const DATA_CACHE_NAME = "weatherbyGV-data-cache-v1"
+const DATA_CACHE_NAME = "weatherbyGV-data-cache-v0"
 
 // install
 self.addEventListener("install", function (evt) {
@@ -70,11 +52,14 @@ self.addEventListener("activate", function (evt) {
 		}),
 	)
 
-	self.clients.claim()
+	// self.clients.claim()
 })
 
 // fetch
 self.addEventListener("fetch", function (evt) {
+	// for future specificity
+	// if (evt.request.url.includes("/api/")) {
+	// }
 	evt.respondWith(
 		caches
 			.open(DATA_CACHE_NAME)
@@ -93,8 +78,4 @@ self.addEventListener("fetch", function (evt) {
 			})
 			.catch(err => console.log(err)),
 	)
-	// for future specificity
-	if (evt.request.url.includes("/api/")) {
-		return
-	}
 })

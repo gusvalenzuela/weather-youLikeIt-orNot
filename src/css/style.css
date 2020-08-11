@@ -62,7 +62,6 @@ header.header {
 .search-form {
 	display: flex;
 	justify-self: center;
-	padding: 1rem 0;
 	width: 90%;
 }
 

@@ -112,8 +112,9 @@ const render = city => {
 		uviElement.innerHTML = city.current.uvi // setting the text content
 
 		const uvi = Math.floor(city.current.uvi)
+		console.log(uvi)
 		// changing bg-color of parent element (div)
-		if (uvi > 11) {
+		if (uvi >= 11) {
 			uviElement.className = `uvi-violet`
 		} else if (uvi >= 8) {
 			uviElement.className = `uvi-red`
@@ -172,19 +173,6 @@ function printHistory() {
 		historyDiv.append(span)
 	}
 }
-const ServiceWorker = () => {
-	let swController = navigator.serviceWorker.controller
-	if ("serviceWorker" in navigator) {
-		if (swController !== null && swController.state !== `activated`) {
-			console.log(`Go ahead and register your service worker`)
-			navigator.serviceWorker.register("./sw.js")
-		} else {
-			console.log(`Your SW is activated!`)
-		}
-	} else {
-		console.log(`This browser does not support service worker API`)
-	}
-}
 // function getGoogleImages() {
 // 	console.log(currCit.name.length)
 // 	// for(i=0;i<currCit.name.length;i++){
@@ -195,7 +183,6 @@ const ServiceWorker = () => {
 init()
 
 function init() {
-	ServiceWorker()
 	grabWeather(`monterey`) // initial city to display on load
 
 	// refreshes the time displayed every second
@@ -218,9 +205,7 @@ function init() {
 	historyDiv.addEventListener(`click`, function (e) {
 		if (e.target.nodeName === "BUTTON") {
 			grabWeather(e.target.innerText)
-		} else {
-			console.log(`I'm sorry, that's not a list item`)
-		}
+		} 
 	})
 	// search form
 	searchForm.addEventListener(`submit`, e => {
