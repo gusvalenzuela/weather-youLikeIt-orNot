@@ -1,3 +1,5 @@
+/*global Promise*/
+/*eslint no-undef: "error"*/
 const CACHE_NAME = "weatherbyGV-static-cache-v1"
 const FILES_TO_CACHE = [
 	"/",

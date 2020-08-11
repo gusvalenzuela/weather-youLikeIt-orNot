@@ -150,7 +150,7 @@ const render = city => {
 
 function printHistory() {
 	// find how to make the list collapsible on sm screens (with classes)
-	historyDiv.innerHTML = ''
+	historyDiv.innerHTML = ""
 
 	historyDiv.append(`Search History:`)
 	var x = 0
@@ -177,10 +177,10 @@ const ServiceWorker = () => {
 	if ("serviceWorker" in navigator) {
 		if (swController !== null && swController.state !== `activated`) {
 			console.log(`Go ahead and register your service worker`)
+			navigator.serviceWorker.register("./sw.js")
 		} else {
 			console.log(`Your SW is activated!`)
 		}
-		navigator.serviceWorker.register("./sw.js")
 	} else {
 		console.log(`This browser does not support service worker API`)
 	}
