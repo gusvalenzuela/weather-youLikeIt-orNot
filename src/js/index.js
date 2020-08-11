@@ -5,7 +5,7 @@ import "core-js/stable" //	for async functionality
 import "regenerator-runtime/runtime" //	for async functionality
 const searchForm = document.querySelector(`#search-form`)
 const searchInput = document.querySelector(`#search-input`)
-const historyDiv = $(`#history-div`)
+const historyDiv = document.getElementById(`history-div`)
 var searchHistory = []
 var currentCityTZ = 0
 // Create a request variable and assign a new XMLHttpRequest object to it.
@@ -87,7 +87,7 @@ const render = city => {
 	// temp image/icon
 	d.querySelector(`#temp-icon`).setAttribute(
 		`src`,
-		`./icons/${city.current.weather[0].icon}.svg`,
+		`./weather-icons/${city.current.weather[0].icon}.svg`,
 		// `https://openweathermap.org/img/wn/${city.current.weather[0].icon}@2x.png`,
 	)
 	//temp
@@ -137,7 +137,7 @@ const render = city => {
 
 			div.innerHTML = `
 			<p>${moment.unix(day.dt).utcOffset(currentCityTZ).format("dddd, M/D")}</p>
-			<img src="./icons/${day.weather[0].icon}.svg"/>
+			<img src="./weather-icons/${day.weather[0].icon}.svg"/>
 			<p style="float:right;">
 			<span style="color: red">H:</span> ${day.temp.max.toFixed(0)}°F
 			<br/>
@@ -150,7 +150,7 @@ const render = city => {
 
 function printHistory() {
 	// find how to make the list collapsible on sm screens (with classes)
-	historyDiv.empty()
+	historyDiv.innerHTML = ''
 
 	historyDiv.append(`Search History:`)
 	var x = 0
@@ -172,7 +172,19 @@ function printHistory() {
 		historyDiv.append(span)
 	}
 }
-
+const ServiceWorker = () => {
+	let swController = navigator.serviceWorker.controller
+	if ("serviceWorker" in navigator) {
+		if (swController !== null && swController.state !== `activated`) {
+			console.log(`Go ahead and register your service worker`)
+		} else {
+			console.log(`Your SW is activated!`)
+		}
+		navigator.serviceWorker.register("./sw.js")
+	} else {
+		console.log(`This browser does not support service worker API`)
+	}
+}
 // function getGoogleImages() {
 // 	console.log(currCit.name.length)
 // 	// for(i=0;i<currCit.name.length;i++){
@@ -183,11 +195,8 @@ function printHistory() {
 init()
 
 function init() {
-	if (JSON.parse(localStorage.getItem(`WbGV-search-history`)) !== null) {
-		searchHistory = JSON.parse(localStorage.getItem(`WbGV-search-history`))
-		printHistory()
-	}
-	grabWeather(`monterey`)
+	ServiceWorker()
+	grabWeather(`monterey`) // initial city to display on load
 
 	// refreshes the time displayed every second
 	// the time is changed in function via the timezone set in "grab weather"
@@ -195,16 +204,18 @@ function init() {
 		document.querySelector(`#current-city-date`).textContent = `${getTime()}`
 	}, 1000)
 
+	// loads the easy to use PlaceSearch.js
+	// provided by MapQuest: https://developer.mapquest.com/documentation/place-search-js/v1.0/
 	placeSearch({
 		key: `4S11JlnMWVUPrva4271IE6m3AXotzHMJ`,
 		container: searchInput,
 		limit: 7,
 		collection: ["address", "adminArea"],
 	})
+
 	// L I S T E N E R S
 	// re-run search if any of "history" searches is clicked
-	let tempHisDiv = document.querySelector(`#history-div`)
-	tempHisDiv.addEventListener(`click`, function (e) {
+	historyDiv.addEventListener(`click`, function (e) {
 		if (e.target.nodeName === "BUTTON") {
 			grabWeather(e.target.innerText)
 		} else {
@@ -218,4 +229,11 @@ function init() {
 		// grab data from weather api
 		grabWeather(searchInput.value.trim().toLowerCase())
 	})
+
+	// search history is locally stored
+	// this retrieves any if found and displays it on the screen
+	if (JSON.parse(localStorage.getItem(`WbGV-search-history`)) !== null) {
+		searchHistory = JSON.parse(localStorage.getItem(`WbGV-search-history`))
+		printHistory()
+	}
 }

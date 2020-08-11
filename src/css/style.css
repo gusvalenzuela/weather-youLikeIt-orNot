@@ -197,7 +197,7 @@ header.header {
 }
 
 #temp-icon {
-	height: 60%;
+	height: 175px;
 	padding: 1rem;
 }
 
@@ -228,6 +228,13 @@ header.header {
 	margin-top: 50px;
 	padding: 1rem 0 2.25rem;
 	text-align: center;
+}
+
+.footer-captions {
+	display: flex;
+	font-size: small;
+	justify-content: center;
+	padding-top: 10px;
 }
 
 .uvi-violet {
