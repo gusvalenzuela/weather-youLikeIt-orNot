@@ -1,6 +1,6 @@
 /*global Promise*/
 /*eslint no-undef: "error"*/
-const CACHE_NAME = "weatherbyGV-static-cache-v3"
+const CACHE_NAME = "weatherbyGV-static-cache-v1"
 const FILES_TO_CACHE = [
 	"/",
 	"/icons/favicon.ico",
@@ -9,7 +9,7 @@ const FILES_TO_CACHE = [
 	"/dist/index.js",
 	"/dist/weather.png",
 ]
-const DATA_CACHE_NAME = "weatherbyGV-data-cache-v0"
+const DATA_CACHE_NAME = "weatherbyGV-data-cache-v1"
 
 // install
 self.addEventListener("install", function (evt) {
@@ -45,14 +45,14 @@ self.addEventListener("activate", function (evt) {
 					if (key !== CACHE_NAME && key !== DATA_CACHE_NAME) {
 						console.log("[SW] Removing old cache data", key)
 						// This ensures we have only the files we need in the cache, so we don't leave any garbage behind;
-						return caches.delete(key)
+						return CacheStorage.delete(key)
 					}
 				}),
 			)
 		}),
 	)
 
-	// self.clients.claim()
+	self.clients.claim()
 })
 
 // fetch

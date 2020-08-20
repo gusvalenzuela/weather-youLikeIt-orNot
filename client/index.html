@@ -7,11 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#000000" />
 		<meta name="Weather_byGV" content="Web site created using much love." />
-		<link
-			rel="apple-touch-icon"
-			sizes="180x180"
-			href="/icons/logo192.png"
-		/>
+		<link rel="apple-touch-icon" sizes="180x180" href="/icons/logo192.png" />
 		<link
 			rel="icon"
 			type="image/png"
@@ -30,7 +26,6 @@
 			href="https://api.mqcdn.com/sdk/place-search-js/v1.0.0/place-search.css"
 		/>
 		<script src="https://api.mqcdn.com/sdk/place-search-js/v1.0.0/place-search.js"></script>
-		<!-- <link rel="stylesheet" href="./css/style.css" /> -->
 		<title>Weather_byGV</title>
 	</head>
 	<body>
@@ -38,19 +33,22 @@
 		<header class="header">
 			<form class="search-form" id="search-form">
 				<label class="" for="search-input">Search:</label>
-				<input type="search" id="search-input" placeholder="City, State" />
-				<!-- <input type="text" id="search-input" placeholder="City, State" /> -->
+				<input type="search" id="search-input" placeholder="City" />
 				<button type="submit" id="search-button" value="Submit">
 					🔍
 				</button>
 			</form>
+			<button id="geo-button" class="geo-button">
+				Use Current Location
+			</button>
 		</header>
 
 		<!-- main  -->
 		<main class="wrapper main-container">
+			<div id="no-history" class="no-history" style="display: none;"></div>
 			<div class="main-content">
 				<div class="left-top-side">
-					<h1 id="current-city-name">Monterey, CA</h1>
+					<h1 id="current-city-name">City, State</h1>
 					<h3 id="current-city-date">Tue Jan 1st 12:00 AM</h3>
 					<div
 						style="
@@ -86,59 +84,53 @@
 							/>
 						</div>
 					</div>
-					<!-- <div class="current-stats" id="current-stats">
-						
-					</div> -->
-					<!-- <div class="current-city" id="current-city-div">
-            <div class="current-city-stats" id="current-city-stats"></div>
-          </div> -->
 				</div>
 				<div class="right-bottom-side">
 					<div class="forecast" id="1">
-						<p>Day X</p>
+						<p>Day 1</p>
 						<p style="color: darkred;">H: 00°F</p>
 						<p style="color: darkblue;">L: 00°F</p>
 					</div>
 					<div class="forecast" id="2">
-						<p>Day X</p>
+						<p>Day 2</p>
 						<p style="color: darkred;">H: 00°F</p>
 						<p style="color: darkblue;">L: 00°F</p>
 					</div>
 					<div class="forecast" id="3">
-						<p>Day X</p>
+						<p>Day 3</p>
 						<p style="color: darkred;">H: 00°F</p>
 						<p style="color: darkblue;">L: 00°F</p>
 					</div>
 					<div class="forecast" id="4">
-						<p>Day X</p>
+						<p>Day 4</p>
 						<p style="color: darkred;">H: 00°F</p>
 						<p style="color: darkblue;">L: 00°F</p>
 					</div>
 					<div class="forecast" id="5">
-						<p>Day X</p>
+						<p>Day 5</p>
 						<p style="color: darkred;">H: 00°F</p>
 						<p style="color: darkblue;">L: 00°F</p>
 					</div>
 					<div class="forecast" id="6">
-						<p>Day X</p>
+						<p>Day 6</p>
 						<p style="color: darkred;">H: 00°F</p>
 						<p style="color: darkblue;">L: 00°F</p>
 					</div>
 					<div class="forecast" id="7">
-						<p>Day X</p>
+						<p>Day 7</p>
 						<p style="color: darkred;">H: 00°F</p>
 						<p style="color: darkblue;">L: 00°F</p>
 					</div>
 				</div>
 			</div>
 			<div class="" id="history-div">
-				Search History: (begin your search above)
+				Search History: (n/a)
 			</div>
 		</main>
 		<!-- footer  -->
 		<footer class="footer">
 			<div class="footer-container">
-				<span class="text-muted"
+				<span class="footer-links"
 					>Copyright &copy; 2020
 					<a
 						href="https://gusvalenzuela.com/"
@@ -166,8 +158,8 @@
 					<a href="https://www.flaticon.com/" title="Flaticon">
 						www.flaticon.com</a
 					>
-					|
 				</span>
+				<span style="margin: 0 5px;">|</span>
 				<span>
 					Wallpaper by
 					<a
@@ -184,34 +176,32 @@
 	<!-- moment time JS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 	<!-- bootstrap optional JS  -->
-	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-	<!-- <script
-		defer
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-		crossorigin="anonymous"
-	></script> -->
+	<!-- <script src="https://code.jquery.com/jquery-3.4.1.js"></script> -->
 	<script src="./dist/index.js"></script>
 	<script>
 		if ("serviceWorker" in navigator) {
-			window.addEventListener("load", () => {
-				if (
-					navigator.serviceWorker.controller &&
-					navigator.serviceWorker.controller.state === `redundant`
-				) {
-					console.log(navigator.serviceWorker)
-				} else {
-					navigator.serviceWorker.register("/wgv-sw.js").then(reg => {
-						console.log("We found your service worker file!", reg)
-					})
-				}
-			})
+			// Register a service worker hosted at the root of the
+			// site using the default scope.
+			navigator.serviceWorker.register("/wgv-sw.js").then(
+				function (registration) {
+					console.log("Service worker registration succeeded:", registration)
+				},
+				/*catch*/ function (error) {
+					console.log("Service worker registration failed:", error)
+				},
+			)
+		} else {
+			console.log("Service workers are not supported.")
 		}
 		const openUVRange = () => {
 			let element = document.getElementById("current-uvindex-img")
 			element.style.display === "none"
 				? (element.style.display = "block")
 				: (element.style.display = "none")
+		}
+		const gotoTop = () => {
+			document.body.scrollTop = 0 // For Safari
+			document.documentElement.scrollTop = 0 // For Chrome, Firefox, IE and Opera
 		}
 	</script>
 	<!-- S C R I P T S | S C R I P T S -->

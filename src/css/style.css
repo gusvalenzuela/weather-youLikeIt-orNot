@@ -59,6 +59,16 @@ header.header {
 	width: 90%;
 }
 
+.geo-button {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	margin: auto;
+	padding: 0.5rem;
+	text-decoration: underline;
+	width: fit-content;
+}
+
 .search-form {
 	display: flex;
 	justify-self: center;
@@ -77,6 +87,11 @@ header.header {
 	border-radius: 0;
 
 	/* width: 200px; */
+}
+
+.no-history {
+	margin: auto;
+	text-align: center;
 }
 
 .main-content {
@@ -222,11 +237,29 @@ header.header {
 	background: #ff000075;
 }
 
+.clear-history {
+	float: right;
+	padding: 4px;
+}
+
+.clear-history::after {
+	content: "🧹";
+}
+
+/* @media screen and (min-width: 768px) {
+
+} */
+
 .footer {
-	background-color: var(--white80);
+	background-color: var(--white100);
+	border-top: 5px groove var(--white80);
 	margin-top: 50px;
 	padding: 1rem 0 2.25rem;
 	text-align: center;
+}
+
+.footer-links a {
+	margin-left: 3px;
 }
 
 .footer-captions {
