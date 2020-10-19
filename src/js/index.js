@@ -8,6 +8,7 @@ const searchInput = document.getElementById("search-input")
 const geoButton = document.getElementById("geo-button")
 const historyDiv = document.getElementById("history-div")
 const noHistoryDiv = document.getElementById("no-history")
+const mainContainerWrapper = document.getElementById("main-container")
 var searchHistory = []
 var currentCityTZ = 0 // holding current timezone
 
@@ -85,6 +86,7 @@ const getTime = () => {
 }
 
 const render = city => {
+	mainContainerWrapper.style.display = "initial"
 	noHistoryDiv.style.display = "none"
 	document.querySelector(".main-content").style.display = "flex"
 	// console.log(city)
@@ -222,6 +224,8 @@ function init() {
 				)
 				// if yes
 				if (clear) {
+					// refresh the page to clear display
+					window.location.reload()
 					// clear the global array
 					searchHistory = []
 					// replace locally stored search history with empty array
@@ -250,17 +254,20 @@ function init() {
 		// grab data from weather api
 		grabWeatherbyCoords()
 	}
+	let localHistory = JSON.parse(localStorage.getItem(`WbGV-search-history`))
 
-	// search history is locally stored
-	// this retrieves any if found and displays it on the screen
-	if (JSON.parse(localStorage.getItem(`WbGV-search-history`)) !== null) {
-		searchHistory = JSON.parse(localStorage.getItem(`WbGV-search-history`))
-		grabWeather(searchHistory[searchHistory.length - 1]) // last city searched to display on load, if any found
-		printHistory()
-	} else {
+	if (localHistory === null || localHistory.length < 1) {
 		// if no history is found
+		mainContainerWrapper.style.display = "none"
 		noHistoryDiv.innerHTML = `<h1>Begin your search 👆</h1>`
 		noHistoryDiv.style.display = "block"
+	} else {
+		// search history is locally stored
+		// this retrieves any if found and displays it on the screen
+		mainContainerWrapper.style.display = "initial"
+		searchHistory = localHistory
+		grabWeather(searchHistory[searchHistory.length - 1]) // last city searched to display on load, if any found
+		printHistory()
 	}
 }
 
